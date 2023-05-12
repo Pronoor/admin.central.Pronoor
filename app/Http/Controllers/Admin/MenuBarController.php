@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMenuBarRequest;
 use App\Http\Requests\UpdateMenuBarRequest;
+use App\Http\Resources\MenuBarResource;
 use App\Models\MenuBar;
 
 class MenuBarController extends Controller
@@ -16,7 +17,11 @@ class MenuBarController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.menubar.index');
+        return view('admin.cms.menubar.index',
+            [
+                'menus' => MenuBar::paginate(15)
+            ]
+        );
     }
 
     /**
@@ -26,24 +31,32 @@ class MenuBarController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.cms.menubar.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMenuBarRequest  $request
+     * @param \App\Http\Requests\StoreMenuBarRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMenuBarRequest $request)
     {
-        //
+        try {
+            MenuBar::create($request->getMenuBarPayload());
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Menu Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MenuBar  $menuBar
+     * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
     public function show(MenuBar $menuBar)
@@ -54,19 +67,19 @@ class MenuBarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MenuBar  $menuBar
+     * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
     public function edit(MenuBar $menuBar)
     {
-        //
+        return view('admin.cms.menubar.edit');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMenuBarRequest  $request
-     * @param  \App\Models\MenuBar  $menuBar
+     * @param \App\Http\Requests\UpdateMenuBarRequest $request
+     * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateMenuBarRequest $request, MenuBar $menuBar)
@@ -77,7 +90,7 @@ class MenuBarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MenuBar  $menuBar
+     * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
     public function destroy(MenuBar $menuBar)

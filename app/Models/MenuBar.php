@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MenuBar extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'url', 'order'];
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMenuBarRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreMenuBarRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,21 @@ class StoreMenuBarRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required',
+            ],
+            'url' => [
+                'required',
+            ],
+            'order' => [
+                'required', 'integer', 'max:12', 'min:1'
+            ],
         ];
+    }
+
+    public function getMenuBarPayload()
+    {
+        return collect($this->validated())
+            ->toArray();
     }
 }

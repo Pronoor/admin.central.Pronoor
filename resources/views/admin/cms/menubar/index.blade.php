@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Menubar::List</h1>
+                <h1>Menu Bar::List</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Menubar</li>
+                    <li class="breadcrumb-item active">Menu Bar</li>
                 </ol>
             </div>
         </div>
@@ -34,156 +34,51 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-sm btn-primary">Add New Menu</button>
+                        <a type="button" href="{{route('admin.menus.create')}}" class="btn btn-sm btn-primary">Add New
+                            Manu Bar</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        @endif
+
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
+                                <th>Title</th>
+                                <th>Url</th>
+                                <th>Order</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 5.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td>5</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 5.5
-                                </td>
-                                <td>Win 95+</td>
-                                <td>5.5</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 6
-                                </td>
-                                <td>Win 98+</td>
-                                <td>6</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet Explorer 7</td>
-                                <td>Win XP SP2+</td>
-                                <td>7</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>AOL browser (AOL desktop)</td>
-                                <td>Win XP</td>
-                                <td>6</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Firefox 1.0</td>
-                                <td>Win 98+ / OSX.2+</td>
-                                <td>1.7</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Firefox 1.5</td>
-                                <td>Win 98+ / OSX.2+</td>
-                                <td>1.8</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Firefox 2.0</td>
-                                <td>Win 98+ / OSX.2+</td>
-                                <td>1.8</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Firefox 3.0</td>
-                                <td>Win 2k+ / OSX.3+</td>
-                                <td>1.9</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Camino 1.0</td>
-                                <td>OSX.2+</td>
-                                <td>1.8</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Camino 1.5</td>
-                                <td>OSX.3+</td>
-                                <td>1.8</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach ($menus as $menu)
+
+                                <tr>
+                                    <td> {{ $menu->title}}</td>
+                                    <td>{{ $menu->url}}</td>
+                                    <td>{{ $menu->order}}</td>
+                                    <td>
+                                        <a type="button" href="{{route('admin.home-sliders.edit',1)}}"
+                                           class="btn btn-sm btn-primary">Edit</a>
+                                        <a type="button" href="{{route('admin.home-sliders.delete',1)}}"
+                                           class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
+                                <th>Title</th>
+                                <th>Url</th>
+                                <th>Order</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>

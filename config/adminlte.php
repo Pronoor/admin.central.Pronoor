@@ -384,45 +384,55 @@ return [
             'url' => '#',
         ],*/
         [
+            'text' => 'Users',
+            'icon' => 'fas fa-fw fa fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Users List',
+                    'url' => 'admin/users/',
+                ]
+            ],
+        ],
+        [
             'text' => 'CMS',
             'icon' => 'fas fa-fw fa fa-cogs',
             'label' => 9,
             'submenu' => [
                 [
                     'text' => 'Menubar',
-                    'url' => 'admin/menubar/index/',
+                    'url' => 'admin/menus/',
                 ],
                 [
                     'text' => 'Home Sliders',
-                    'url' => '#',
+                    'url' => 'admin/home-sliders/',
                 ],
                 [
                     'text' => 'Footer Links',
-                    'url' => '#',
+                    'url' => 'admin/footer-links/',
                 ],
                 [
                     'text' => 'About Us',
-                    'url' => '#',
+                    'url' => 'admin/about-us',
                 ],
                 [
                     'text' => 'Testimonials',
-                    'url' => '#',
+                    'url' => 'admin/testimonial/',
                 ],
                 [
                     'text' => 'Service',
-                    'url' => '#',
+                    'url' => 'admin/service/',
                 ],
                 [
                     'text' => 'FAQ',
-                    'url' => '#',
+                    'url' => 'admin/faq/',
                 ],
                 [
                     'text' => 'Terms & Conditions',
-                    'url' => '#',
+                    'url' => 'admin/terms-conditions/',
                 ],
                 [
                     'text' => 'Privacy Policy',
-                    'url' => '#',
+                    'url' => 'admin/privacy-policies/',
                 ]
 
             ],
