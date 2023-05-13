@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Home Slider::Update</h1>
+                <h1>Menu ::Update</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Home Slider</li>
+                    <li class="breadcrumb-item active">Manu</li>
                 </ol>
             </div>
         </div>
@@ -38,37 +38,41 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form>
+                        @if(count($errors) > 0 )
+                            <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form  method="post" action="{{route('admin.menus.update',$menuBars->id)}}" id="quickForm">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    <label for="title">Menu Title</label>
+                                    <input type="text" name="title" class="form-control" id="title" value="{{ $menuBars->title }}"
+                                           placeholder="Enter title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="url">Menu Url</label>
+                                    <input type="text" name="url" class="form-control" id="url" value="{{ $menuBars->url }}"
+                                           placeholder="Enter url">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    <label for="order">Menu Order</label>
+                                    <input type="text" name="order" class="form-control" id="order" value="{{ $menuBars->order }}"
+                                           placeholder="Enter order">
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>
@@ -83,9 +87,51 @@
 @stop
 
 @push('js')
-
+    <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 @endpush
 
 @section('js')
-
+    <script>
+        $(function () {
+            // $.validator.setDefaults({
+            //     submitHandler: function () {
+            //         $('#quickForm').submit();
+            //     }
+            // });
+            $('#quickForm').validate({
+                rules: {
+                    title: {
+                        required: true,
+                    },
+                    url: {
+                        required: true,
+                    },
+                    order: {
+                        required: true
+                    },
+                },
+                messages: {
+                    title: {
+                        required: "Please enter a title",
+                    },
+                    url: {
+                        required: "Please enter a url",
+                    }, order: {
+                        required: "Please enter a order",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 @stop

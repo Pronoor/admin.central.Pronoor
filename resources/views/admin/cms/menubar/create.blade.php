@@ -116,7 +116,7 @@
                     url: {
                         required: "Please enter a url",
                     }, order: {
-                        required: "Please enter a url",
+                        required: "Please enter a order",
                     },
                 },
                 errorElement: 'span',

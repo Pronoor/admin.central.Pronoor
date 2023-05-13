@@ -34,7 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.menus.create')}}" class="btn btn-sm btn-primary">Add New
+                        <a type="button" href="{{ route('admin.menus.create') }}" class="btn btn-sm btn-primary">Add New
                             Manu Bar</a>
                     </div>
                     <!-- /.card-header -->
@@ -50,37 +50,37 @@
 
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Url</th>
-                                <th>Order</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Url</th>
+                                    <th>Order</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach ($menus as $menu)
-
-                                <tr>
-                                    <td> {{ $menu->title}}</td>
-                                    <td>{{ $menu->url}}</td>
-                                    <td>{{ $menu->order}}</td>
-                                    <td>
-                                        <a type="button" href="{{route('admin.home-sliders.edit',1)}}"
-                                           class="btn btn-sm btn-primary">Edit</a>
-                                        <a type="button" href="{{route('admin.home-sliders.delete',1)}}"
-                                           class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach ($menus as $menu)
+                                    <tr>
+                                        <td> {{ $menu->title }}</td>
+                                        <td>{{ $menu->url }}</td>
+                                        <td>{{ $menu->order }}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.menus.edit', $menu->id) }}"
+                                                class="btn btn-sm btn-primary">Edit</a>
+                                            <a onclick="return confirm('Are you sure to delete')" type="button"
+                                                href="{{ route('admin.menus.delete', $menu->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th>Title</th>
-                                <th>Url</th>
-                                <th>Order</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Url</th>
+                                    <th>Order</th>
+                                    <th>Action</th>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>
@@ -108,7 +108,7 @@
 
 @section('js')
     <script>
-        $(function () {
+        $(function() {
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
