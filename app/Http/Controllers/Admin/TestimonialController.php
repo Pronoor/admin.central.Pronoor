@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTestimonialRequest;
+use App\Http\Requests\UpdateTestimonialRequest;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
@@ -14,7 +17,10 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.testimonial.index');
+        return view('admin.cms.testimonial.index',
+        [
+            'testimonials' => Testimonial::paginate(15)
+        ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class TestimonialController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTestimonialRequest $request)
     {
-        //
+        try {
+            Testimonial::create($request->getMenuBarPayload());
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Testimonial Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +68,10 @@ class TestimonialController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.testimonial.edit');
+        return view('admin.cms.testimonial.edit',
+        [
+            'testimonials' => Testimonial::find($id)
+        ]);
     }
 
     /**
@@ -67,9 +81,18 @@ class TestimonialController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTestimonialRequest $request, $id)
     {
-        //
+        try {
+            Testimonial::find($id)->update($request->getMenuBarPayload([
+                'quote' =>$request->quote,
+                'quotes_given_by' =>$request->quotes_given_by,
+                'quotes_given_by_profession' =>$request->quotes_given_by_profession
+            ]));
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Testimonial Updated Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +103,11 @@ class TestimonialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Testimonial::where('id',$id)->delete();
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Testimonial Deleted Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

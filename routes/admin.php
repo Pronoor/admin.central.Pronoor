@@ -47,7 +47,9 @@ Route::get('/about-us/{id}/delete/', [AboutUsController::class, 'destroy'])->nam
 
 Route::get('/testimonial/', [TestimonialController::class, 'index'])->name('admin.testimonial');
 Route::get('/testimonial/create/', [TestimonialController::class, 'create'])->name('admin.testimonial.create');
+Route::post('/testimonial/store/', [TestimonialController::class, 'store'])->name('admin.testimonial.store');
 Route::get('/testimonial/{id}/edit/', [TestimonialController::class, 'edit'])->name('admin.testimonial.edit');
+Route::post('/testimonial/{id}/update/', [TestimonialController::class, 'update'])->name('admin.testimonial.update');
 Route::get('/testimonial/{id}/delete/', [TestimonialController::class, 'destroy'])->name('admin.testimonial.delete');
 
 Route::get('/service/', [ServiceController::class, 'index'])->name('admin.service');

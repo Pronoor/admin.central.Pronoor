@@ -64,7 +64,7 @@
                                         <td> {{ $homeSlider->title }}</td>
                                         <td>{{ $homeSlider->description }}</td>
                                         <td>
-                                            <img style="width: 70px"
+                                            <img style="width: 60px"
                                                 src="{{ asset('uploads/sliders/'.$homeSlider->slider_photos) }}"
                                                 alt="not found">
                                         </td>

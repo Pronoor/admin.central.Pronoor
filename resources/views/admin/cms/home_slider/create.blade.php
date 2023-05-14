@@ -60,7 +60,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Descreption</label>
                                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
-                                    {{-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Photo</label>

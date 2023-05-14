@@ -20,7 +20,6 @@ class HomeSliderController extends Controller
     public function index()
     {
         return view('admin.cms.home_slider.index',[
-
             'homeSliders' => HomeSlider::paginate(15),
             
         ]);
