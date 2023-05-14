@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFooterLinksRequest;
+use App\Http\Requests\UpdateFooterLinksRequest;
+use App\Models\FooterLink;
 use Illuminate\Http\Request;
 
 class FooterLinkController extends Controller
@@ -14,7 +17,11 @@ class FooterLinkController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.footer_link.index');
+        return view('admin.cms.footer_link.index',
+            [
+                'footer_links' => FooterLink::all()
+            ]
+        );
     }
 
     /**
@@ -25,6 +32,7 @@ class FooterLinkController extends Controller
     public function create()
     {
         return view('admin.cms.footer_link.create');
+
     }
 
     /**
@@ -33,9 +41,15 @@ class FooterLinkController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFooterLinksRequest $request)
     {
-        //
+        try {
+            FooterLink::create($request->getMenuBarPayload());
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Footer Links Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
+
     }
 
     /**
@@ -57,7 +71,10 @@ class FooterLinkController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.footer_link.edit');
+        return view('admin.cms.footer_link.edit', [
+            'footer_link' => FooterLink::find($id)
+        ]);
+
     }
 
     /**
@@ -67,9 +84,15 @@ class FooterLinkController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFooterLinksRequest $request, $id)
     {
-        //
+        try {
+            $FooterLink = FooterLink::find($id);
+            $FooterLink->update($request->getMenuBarPayload());
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Footer Links update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +103,12 @@ class FooterLinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $footerLink = FooterLink::findOrFail($id);
+            $footerLink->delete();
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Footer Links delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FooterLinkController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

@@ -37,7 +37,9 @@ Route::get('/home-sliders/{id}/delete/', [HomeSliderController::class, 'destroy'
 
 Route::get('/footer-links/', [FooterLinkController::class, 'index'])->name('admin.footer-links');
 Route::get('/footer-links/create/', [FooterLinkController::class, 'create'])->name('admin.footer-links.create');
+Route::post('/footer-links/store/', [FooterLinkController::class, 'store'])->name('admin.footer-links.store');
 Route::get('/footer-links/{id}/edit/', [FooterLinkController::class, 'edit'])->name('admin.footer-links.edit');
+Route::post('/footer-links/{id}/update', [FooterLinkController::class, 'update'])-> name('admin.footer-links.update');
 Route::get('/footer-links/{id}/delete/', [FooterLinkController::class, 'destroy'])->name('admin.footer-links.delete');
 
 Route::get('/about-us/', [AboutUsController::class, 'index'])->name('admin.about-us');

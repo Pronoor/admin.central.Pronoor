@@ -29,7 +29,7 @@ class StoreMenuBarRequest extends FormRequest
                 'required',
             ],
             'url' => [
-                'required',
+                'required|url|unique:footer_links'
             ],
             'order' => [
                 'required', 'integer', 'max:12', 'min:1'
