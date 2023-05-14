@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FooterLinkController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\HomeSliderController;
 use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -23,13 +24,16 @@ Route::get('/users/{id}/delete/', [UserController::class, 'destroy'])->name('adm
 Route::get('/menus/', [MenuBarController::class, 'index'])->name('admin.menus');
 Route::get('/menus/create/', [MenuBarController::class, 'create'])->name('admin.menus.create');
 Route::post('/menus/store/', [MenuBarController::class, 'store'])->name('admin.menus.store');
-Route::get('/menus/{id}/edit//', [MenuBarController::class, 'edit'])->name('admin.menus.edit');
+Route::get('/menus/{id}/edit/', [MenuBarController::class, 'edit'])->name('admin.menus.edit');
+Route::post('/menus/{id}/update', [MenuBarController::class, 'update'])->name('admin.menus.update');
 Route::get('/menus/{id}/delete/', [MenuBarController::class, 'destroy'])->name('admin.menus.delete');
 
-Route::get('/home-sliders/', [MenuBarController::class, 'index'])->name('admin.home-sliders');
-Route::get('/home-sliders/create/', [MenuBarController::class, 'create'])->name('admin.home-sliders.create');
-Route::get('/home-sliders/{id}/edit/', [MenuBarController::class, 'edit'])->name('admin.home-sliders.edit');
-Route::get('/home-sliders/{id}/delete/', [MenuBarController::class, 'destroy'])->name('admin.home-sliders.delete');
+Route::get('/home-sliders/', [HomeSliderController::class, 'index'])->name('admin.home-sliders');
+Route::get('/home-sliders/create/', [HomeSliderController::class, 'create'])->name('admin.home-sliders.create');
+Route::post('/home-sliders/store/', [HomeSliderController::class, 'store'])->name('admin.home-sliders.store');
+Route::get('/home-sliders/{id}/edit/', [HomeSliderController::class, 'edit'])->name('admin.home-sliders.edit');
+Route::post('/home-sliders/{id}/update/', [HomeSliderController::class, 'update'])->name('admin.home-sliders.update');
+Route::get('/home-sliders/{id}/delete/', [HomeSliderController::class, 'destroy'])->name('admin.home-sliders.delete');
 
 Route::get('/footer-links/', [FooterLinkController::class, 'index'])->name('admin.footer-links');
 Route::get('/footer-links/create/', [FooterLinkController::class, 'create'])->name('admin.footer-links.create');

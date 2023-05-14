@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class UpdateMenuBarRequest extends FormRequest
+class StoreHomeSliderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,11 +29,11 @@ class UpdateMenuBarRequest extends FormRequest
             'title' => [
                 'required',
             ],
-            'url' => [
+            'description' => [
                 'required',
             ],
-            'order' => [
-                'required', 'integer', 'max:12', 'min:1'
+            'slider_photos' => [
+                'required','mimes:jpg',
             ],
         ];
     }

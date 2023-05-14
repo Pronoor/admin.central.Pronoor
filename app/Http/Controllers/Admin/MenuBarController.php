@@ -70,9 +70,14 @@ class MenuBarController extends Controller
      * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function edit(MenuBar $menuBar)
+    public function edit($id)
     {
-        return view('admin.cms.menubar.edit');
+        // print_r($menuBar);
+        return view('admin.cms.menubar.edit',
+        [
+            'menuBars' => MenuBar::find($id)
+        ]);
+        ;
     }
 
     /**
@@ -82,9 +87,18 @@ class MenuBarController extends Controller
      * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMenuBarRequest $request, MenuBar $menuBar)
+    public function update(UpdateMenuBarRequest $request, $id)
     {
-        //
+        try {
+            MenuBar::find($id)->update($request->getMenuBarPayload([
+                'title' =>$request->title,
+                'url' =>$request->url,
+                'order' =>$request->order
+            ]));
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Menu Updated Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -93,8 +107,13 @@ class MenuBarController extends Controller
      * @param \App\Models\MenuBar $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MenuBar $menuBar)
+    public function destroy($id)
     {
-        //
+        try {
+            MenuBar::where('id',$id)->delete();
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Menu Deleted Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }
