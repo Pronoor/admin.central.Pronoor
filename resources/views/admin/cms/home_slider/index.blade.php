@@ -65,14 +65,14 @@
                                         <td>{{ $homeSlider->description }}</td>
                                         <td>
                                             <img style="width: 70px"
-                                                src="{{ asset('uploads/sliders/'.$homeSlider->slide_photo) }}"
+                                                src="{{ asset('uploads/sliders/'.$homeSlider->slider_photos) }}"
                                                 alt="not found">
                                         </td>
                                         <td>
                                             <a type="button" href="{{ route('admin.home-sliders.edit', $homeSlider->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
                                             <a onclick="return confirm('Are you sure to delete')" type="button"
-                                                href="{{ route('admin.menus.delete', $homeSlider->id) }}"
+                                                href="{{ route('admin.home-sliders.delete', $homeSlider->id) }}"
                                                 class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHomeSliderRequest;
+use App\Http\Requests\UpdateHomeSliderRequest;
 use App\Models\HomeSlider;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class HomeSliderController extends Controller
 {
@@ -18,7 +20,9 @@ class HomeSliderController extends Controller
     public function index()
     {
         return view('admin.cms.home_slider.index',[
-            'homeSliders' => HomeSlider::paginate(15)
+
+            'homeSliders' => HomeSlider::paginate(15),
+            
         ]);
     }
 
@@ -40,23 +44,24 @@ class HomeSliderController extends Controller
      */
     public function store(StoreHomeSliderRequest $request)
     {
-        print_r($request->all());
+        // print_r($request->all());
         try {
             $home_slider_id = HomeSlider::insertGetId($request->getMenuBarPayload([
             'title' => $request->title,
             'description' => $request->description,
             ]));
-            if ($request->hasFile('photo')) {
-                $uploaded_photo = $request->file('photo');
+            if ($request->hasFile('slider_photos')) {
+                $uploaded_photo = $request->file('slider_photos');
                 $new_upload_name ="slider_image_". $home_slider_id . "." . $uploaded_photo->getClientOriginalExtension();
                 $new_upload_location = 'public/uploads/sliders/' . $new_upload_name;
                 Image::make($uploaded_photo)->resize(1080, 1900)->save(base_path($new_upload_location), 50);
                 HomeSlider::find($home_slider_id)->update([
-                    'slide_photo' => $new_upload_name,
+                    'slider_photos' => $new_upload_name,
                 ]);
             }
             return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Home Slider Added Successfully!');;
         } catch (\Exception $exception) {
+            dd($exception);
             return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
     }
@@ -80,7 +85,9 @@ class HomeSliderController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.home_slider.edit');
+        return view('admin.cms.home_slider.edit',[
+            'homeSliders' => HomeSlider::find($id)
+        ]);
     }
 
     /**
@@ -90,9 +97,26 @@ class HomeSliderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateHomeSliderRequest $request, $id)
     {
-        //
+        try {
+            HomeSlider::find($id)->update($request->getMenuBarPayload([
+                'title' =>$request->title,
+                'description' =>$request->description,
+            ]));
+            if ($request->hasFile('slider_photos')) {
+                $uploaded_photo = $request->file('slider_photos');
+                $new_upload_name ="slider_image_". $id . "." . $uploaded_photo->getClientOriginalExtension();
+                $new_upload_location = 'public/uploads/sliders/' . $new_upload_name;
+                Image::make($uploaded_photo)->resize(1080, 1900)->save(base_path($new_upload_location), 50);
+                HomeSlider::where('id',$id)->update([
+                    'slider_photos' => $new_upload_name,
+                ]);
+            }
+            return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Home Slider Updated Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -103,6 +127,11 @@ class HomeSliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            HomeSlider::where('id',$id)->delete();
+            return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Home Slider Deleted Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([HomeSliderController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

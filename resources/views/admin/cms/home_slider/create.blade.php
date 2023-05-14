@@ -66,7 +66,7 @@
                                     <label for="exampleInputFile">Photo</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="photo" id="photo" class="custom-file-input">
+                                            <input type="file" name="slider_photos" id="slider_photos" class="custom-file-input">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -112,7 +112,7 @@
                     description: {
                         required: true,
                     },
-                    photo: {
+                    slider_photos: {
                         required: true
                     },
                 },
@@ -122,7 +122,7 @@
                     },
                     description: {
                         required: "Please enter a description",
-                    }, photo: {
+                    }, slider_photos: {
                         required: "Please enter a photo",
                     },
                 },

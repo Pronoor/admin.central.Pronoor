@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('description', 200);
-            $table->string('slide_photo')->default('default.jpg');
+            $table->string('slider_photos')->default('default.jpg');
             $table->timestamps();
         });
     }

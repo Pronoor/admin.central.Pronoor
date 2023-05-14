@@ -32,6 +32,7 @@ Route::get('/home-sliders/', [HomeSliderController::class, 'index'])->name('admi
 Route::get('/home-sliders/create/', [HomeSliderController::class, 'create'])->name('admin.home-sliders.create');
 Route::post('/home-sliders/store/', [HomeSliderController::class, 'store'])->name('admin.home-sliders.store');
 Route::get('/home-sliders/{id}/edit/', [HomeSliderController::class, 'edit'])->name('admin.home-sliders.edit');
+Route::post('/home-sliders/{id}/update/', [HomeSliderController::class, 'update'])->name('admin.home-sliders.update');
 Route::get('/home-sliders/{id}/delete/', [HomeSliderController::class, 'destroy'])->name('admin.home-sliders.delete');
 
 Route::get('/footer-links/', [FooterLinkController::class, 'index'])->name('admin.footer-links');
