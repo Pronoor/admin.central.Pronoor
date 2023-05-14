@@ -34,43 +34,52 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.footer-links.create')}}" class="btn btn-sm btn-primary">Add New
+                        <a type="button" href="{{route('admin.footer-links.create')}}" class="btn btn-sm btn-primary">Add
+                            New
                             Footer Link</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
+                                <th>Sl</th>
+                                <th>Title</th>
+                                <th>Url</th>
+                                <th>Content</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>
-                                    <a type="button" href="{{route('admin.footer-links.edit',1)}}"
-                                       class="btn btn-sm btn-primary">Edit</a>
-                                    <a type="button" href="{{route('admin.footer-links.delete',1)}}"
-                                       class="btn btn-sm btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                            @foreach ($footer_links as $key=>$footer_link)
+                                <tr>
+                                    <td> {{ $key+1 }}</td>
+                                    <td> {{ $footer_link->title }}</td>
+                                    <td>{{ $footer_link->url }}</td>
+                                    <td>  {!!  $footer_link->content !!}</td>
+                                    <td>
+                                        <a type="button" href="{{route('admin.footer-links.edit',$footer_link->id)}}"
+                                           class="btn btn-sm btn-primary">Edit</a>
+                                        <a onclick="return confirm('Are you sure to delete')" type="button" href="{{route('admin.footer-links.delete',$footer_link->id)}}"
+                                           class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Url</th>
+                                <th>Content</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
