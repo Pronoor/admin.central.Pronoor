@@ -321,7 +321,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => 'admin/profile/settings/',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -390,6 +390,16 @@ return [
                 [
                     'text' => 'Users List',
                     'url' => 'admin/users/',
+                ]
+            ],
+        ],
+        [
+            'text' => 'Tasks',
+            'icon' => 'fas fa-fw fa fa-tasks',
+            'submenu' => [
+                [
+                    'text' => 'Task List',
+                    'url' => 'admin/tasks/',
                 ]
             ],
         ],

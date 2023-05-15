@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\HomeSliderController;
 use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'dashboard'])->name('admin.dashboard');
@@ -39,7 +41,7 @@ Route::get('/footer-links/', [FooterLinkController::class, 'index'])->name('admi
 Route::get('/footer-links/create/', [FooterLinkController::class, 'create'])->name('admin.footer-links.create');
 Route::post('/footer-links/store/', [FooterLinkController::class, 'store'])->name('admin.footer-links.store');
 Route::get('/footer-links/{id}/edit/', [FooterLinkController::class, 'edit'])->name('admin.footer-links.edit');
-Route::post('/footer-links/{id}/update', [FooterLinkController::class, 'update'])-> name('admin.footer-links.update');
+Route::post('/footer-links/{id}/update', [FooterLinkController::class, 'update'])->name('admin.footer-links.update');
 Route::get('/footer-links/{id}/delete/', [FooterLinkController::class, 'destroy'])->name('admin.footer-links.delete');
 
 Route::get('/about-us/', [AboutUsController::class, 'index'])->name('admin.about-us');
@@ -85,3 +87,13 @@ Route::post('/privacy-policies/store/', [PrivacyPolicyController::class, 'store'
 Route::get('/privacy-policies/{id}/edit/', [PrivacyPolicyController::class, 'edit'])->name('admin.privacy-policies.edit');
 Route::post('/privacy-policies/{id}/update/', [PrivacyPolicyController::class, 'update'])->name('admin.privacy-policies.update');
 Route::get('/privacy-policies/{id}/delete/', [PrivacyPolicyController::class, 'destroy'])->name('admin.privacy-policies.delete');
+
+
+Route::get('/profile/settings/', [UserProfileController::class, 'index'])->name('admin.user-profile');
+
+
+Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
+Route::get('/tasks/create/', [TaskController::class, 'create'])->name('admin.tasks.create');
+
+
+
