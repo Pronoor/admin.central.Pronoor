@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAboutUsRequest;
+use App\Http\Requests\UpdateAboutUsRequest;
+use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -14,7 +17,10 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.about_us.index');
+        return view('admin.cms.about_us.index',
+    [
+        'aboutUsed' => AboutUs::all()
+    ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class AboutUsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAboutUsRequest $request)
     {
-        //
+        try {
+            AboutUs::create($request->getMenuBarPayload());
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'About Us Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +68,10 @@ class AboutUsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.about_us.edit');
+        return view('admin.cms.about_us.edit',
+    [
+        'aboutUsed' => AboutUs::find($id)
+    ]);
     }
 
     /**
@@ -67,9 +81,15 @@ class AboutUsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAboutUsRequest $request, $id)
     {
-        //
+        try {
+            $aboutUs = AboutUs::find($id);
+            $aboutUs->update($request->getMenuBarPayload());
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'About Us update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +100,12 @@ class AboutUsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $aboutUs = AboutUs::findOrFail($id);
+            $aboutUs->delete();
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'About Us delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

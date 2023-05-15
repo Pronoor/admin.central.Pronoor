@@ -44,7 +44,9 @@ Route::get('/footer-links/{id}/delete/', [FooterLinkController::class, 'destroy'
 
 Route::get('/about-us/', [AboutUsController::class, 'index'])->name('admin.about-us');
 Route::get('/about-us/create/', [AboutUsController::class, 'create'])->name('admin.about-us.create');
+Route::post('/about-us/store/', [AboutUsController::class, 'store'])->name('admin.about-us.store');
 Route::get('/about-us/{id}/edit/', [AboutUsController::class, 'edit'])->name('admin.about-us.edit');
+Route::post('/about-us/{id}/update/', [AboutUsController::class, 'update'])->name('admin.about-us.update');
 Route::get('/about-us/{id}/delete/', [AboutUsController::class, 'destroy'])->name('admin.about-us.delete');
 
 Route::get('/testimonial/', [TestimonialController::class, 'index'])->name('admin.testimonial');
