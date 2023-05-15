@@ -56,7 +56,9 @@ Route::get('/testimonial/{id}/delete/', [TestimonialController::class, 'destroy'
 
 Route::get('/service/', [ServiceController::class, 'index'])->name('admin.service');
 Route::get('/service/create/', [ServiceController::class, 'create'])->name('admin.service.create');
+Route::post('/service/store/', [ServiceController::class, 'store'])->name('admin.service.store');
 Route::get('/service/{id}/edit/', [ServiceController::class, 'edit'])->name('admin.service.edit');
+Route::post('/service/{id}/update/', [ServiceController::class, 'update'])->name('admin.service.update');
 Route::get('/service/{id}/delete/', [ServiceController::class, 'destroy'])->name('admin.service.delete');
 
 

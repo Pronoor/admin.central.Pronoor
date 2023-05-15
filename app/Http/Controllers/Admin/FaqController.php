@@ -84,8 +84,8 @@ class FaqController extends Controller
     public function update(UpdateFaqRequest $request, $id)
     {
         try {
-            $Faq = Faq::find($id);
-            $Faq->update($request->getMenuBarPayload());
+            $faq = Faq::find($id);
+            $faq->update($request->getMenuBarPayload());
             return redirect()->action([FaqController::class, 'index'])->with('status', 'Faq update Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([FaqController::class, 'index'])->with('status', 'Something Went Wrong!');;
