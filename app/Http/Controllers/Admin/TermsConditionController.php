@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTermsConditionRequest;
+use App\Http\Requests\UpdateTermsConditionRequest;
+use App\Models\TermsCondition;
 use Illuminate\Http\Request;
 
 class TermsConditionController extends Controller
@@ -14,7 +17,10 @@ class TermsConditionController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.terms_condition.index');
+        return view('admin.cms.terms_condition.index',
+    [
+        'termsConditions' => TermsCondition::all()
+    ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class TermsConditionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTermsConditionRequest $request)
     {
-        //
+        try {
+            TermsCondition::create($request->getMenuBarPayload());
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms And Condtion Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +68,10 @@ class TermsConditionController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.terms_condition.edit');
+        return view('admin.cms.terms_condition.edit',
+    [
+        'termsconditions' => TermsCondition::find($id)
+    ]);
     }
 
     /**
@@ -67,9 +81,15 @@ class TermsConditionController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTermsConditionRequest $request, $id)
     {
-        //
+        try {
+            $termCondition = TermsCondition::find($id);
+            $termCondition->update($request->getMenuBarPayload());
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms and condition update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +100,12 @@ class TermsConditionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $termCondition = TermsCondition::findOrFail($id);
+            $termCondition->delete();
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms and condition About Us delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

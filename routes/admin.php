@@ -66,7 +66,9 @@ Route::get('/service/{id}/delete/', [ServiceController::class, 'destroy'])->name
 
 Route::get('/terms-conditions/', [TermsConditionController::class, 'index'])->name('admin.terms-conditions');
 Route::get('/terms-conditions/create/', [TermsConditionController::class, 'create'])->name('admin.terms-conditions.create');
+Route::post('/terms-conditions/store/', [TermsConditionController::class, 'store'])->name('admin.terms-conditions.store');
 Route::get('/terms-conditions/{id}/edit/', [TermsConditionController::class, 'edit'])->name('admin.terms-conditions.edit');
+Route::post('/terms-conditions/{id}/update/', [TermsConditionController::class, 'update'])->name('admin.terms-conditions.update');
 Route::get('/terms-conditions/{id}/delete/', [TermsConditionController::class, 'destroy'])->name('admin.terms-conditions.delete');
 
 
