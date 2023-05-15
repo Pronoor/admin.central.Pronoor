@@ -394,6 +394,25 @@ return [
             ],
         ],
         [
+            'text' => 'Inventory',
+            'icon' => 'fas fa-fw fa fa-indent',
+            'label' => 3,
+            'submenu' => [
+                [
+                    'text' => 'Category',
+                    'url' => 'admin/categories/',
+                ],
+                [
+                    'text' => 'Products',
+                    'url' => 'admin/products/',
+                ],
+                [
+                    'text' => 'Orders',
+                    'url' => 'admin/orders/',
+                ],
+            ],
+        ],
+        [
             'text' => 'CMS',
             'icon' => 'fas fa-fw fa fa-cogs',
             'label' => 9,
