@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Testimonial')
 
 
 @push('css')
@@ -34,9 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.testimonial.create') }}" class="btn btn-sm btn-primary">Add
-                            New
-                            Testimonial</a>
+                        <a type="button" href="{{ route('admin.testimonial.create') }}" class="btn btn-sm btn-primary">Add New Testimonial</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

@@ -103,7 +103,7 @@ class TermsConditionController extends Controller
         try {
             $termCondition = TermsCondition::findOrFail($id);
             $termCondition->delete();
-            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms and condition About Us delete Successfully!');;
+            return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms and condition delete Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }

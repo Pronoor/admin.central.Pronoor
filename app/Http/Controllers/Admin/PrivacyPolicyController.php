@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePrivacyPolicyRequest;
+use App\Http\Requests\UpdatePrivacyPolicayRequest;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsCondition;
 use Illuminate\Http\Request;
 
 class PrivacyPolicyController extends Controller
@@ -14,7 +18,10 @@ class PrivacyPolicyController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.privacy_policy.index');
+        return view('admin.cms.privacy_policy.index',
+    [
+        'privacyPolices' => PrivacyPolicy::all()
+    ]);
     }
 
     /**
@@ -33,9 +40,14 @@ class PrivacyPolicyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePrivacyPolicyRequest $request)
     {
-        //
+        try {
+            PrivacyPolicy::create($request->getMenuBarPayload());
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Privacy Policy Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +69,10 @@ class PrivacyPolicyController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.privacy_policy.edit');
+        return view('admin.cms.privacy_policy.edit',
+    [
+        'privacyPolices' => PrivacyPolicy::find($id)
+    ]);
     }
 
     /**
@@ -67,9 +82,15 @@ class PrivacyPolicyController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePrivacyPolicayRequest $request, $id)
     {
-        //
+        try {
+            $privacyPolicy = PrivacyPolicy::find($id);
+            $privacyPolicy->update($request->getMenuBarPayload());
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Privacy Policy Update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +101,12 @@ class PrivacyPolicyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $privacyPolicy = PrivacyPolicy::findOrFail($id);
+            $privacyPolicy->delete();
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Privacy Policy Delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([PrivacyPolicyController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

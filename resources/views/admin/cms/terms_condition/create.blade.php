@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Terms And Condition')
 
 
 @push('css')

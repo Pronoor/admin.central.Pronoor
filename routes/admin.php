@@ -81,5 +81,7 @@ Route::get('/faq/{id}/delete/', [FaqController::class, 'destroy'])->name('admin.
 
 Route::get('/privacy-policies/', [PrivacyPolicyController::class, 'index'])->name('admin.privacy-policies');
 Route::get('/privacy-policies/create/', [PrivacyPolicyController::class, 'create'])->name('admin.privacy-policies.create');
+Route::post('/privacy-policies/store/', [PrivacyPolicyController::class, 'store'])->name('admin.privacy-policies.store');
 Route::get('/privacy-policies/{id}/edit/', [PrivacyPolicyController::class, 'edit'])->name('admin.privacy-policies.edit');
+Route::post('/privacy-policies/{id}/update/', [PrivacyPolicyController::class, 'update'])->name('admin.privacy-policies.update');
 Route::get('/privacy-policies/{id}/delete/', [PrivacyPolicyController::class, 'destroy'])->name('admin.privacy-policies.delete');

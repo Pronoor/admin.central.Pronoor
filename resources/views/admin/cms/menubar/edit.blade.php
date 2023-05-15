@@ -34,7 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.home-sliders')}}" class="btn btn-sm btn-primary">Back</a>
+                        <a type="button" href="{{route('admin.menus')}}" class="btn btn-sm btn-primary">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
