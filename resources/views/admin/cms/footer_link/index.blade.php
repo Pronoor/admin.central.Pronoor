@@ -34,9 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.footer-links.create')}}" class="btn btn-sm btn-primary">Add
-                            New
-                            Footer Link</a>
+                        <a type="button" href="{{route('admin.footer-links.create')}}" class="btn btn-sm btn-primary">Add New Footer Link</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

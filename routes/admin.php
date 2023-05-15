@@ -68,7 +68,9 @@ Route::get('/terms-conditions/{id}/delete/', [TermsConditionController::class, '
 
 Route::get('/faq/', [FaqController::class, 'index'])->name('admin.faq');
 Route::get('/faq/create/', [FaqController::class, 'create'])->name('admin.faq.create');
+Route::post('/faq/store/', [FaqController::class, 'store'])->name('admin.faq.store');
 Route::get('/faq/{id}/edit/', [FaqController::class, 'edit'])->name('admin.faq.edit');
+Route::post('/faq/{id}/update/', [FaqController::class, 'update'])->name('admin.faq.update');
 Route::get('/faq/{id}/delete/', [FaqController::class, 'destroy'])->name('admin.faq.delete');
 
 Route::get('/privacy-policies/', [PrivacyPolicyController::class, 'index'])->name('admin.privacy-policies');
