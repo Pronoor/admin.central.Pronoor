@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFaqRequest;
+use App\Http\Requests\UpdateFaqRequest;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -14,7 +17,10 @@ class FaqController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.faq.index');
+        return view('admin.cms.faq.index',
+        [
+            'faqs' => Faq::all()
+        ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class FaqController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFaqRequest $request)
     {
-        //
+        try {
+            Faq::create($request->getMenuBarPayload());
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Faq Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +68,10 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.faq.edit');
+        return view('admin.cms.faq.edit',
+        [
+            'fars' => Faq::find($id)
+        ]);
     }
 
     /**
@@ -67,9 +81,15 @@ class FaqController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFaqRequest $request, $id)
     {
-        //
+        try {
+            $faq = Faq::find($id);
+            $faq->update($request->getMenuBarPayload());
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Faq update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +100,12 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $faq = Faq::findOrFail($id);
+            $faq->delete();
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Faq delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([FaqController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

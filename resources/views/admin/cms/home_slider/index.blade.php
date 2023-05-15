@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Home Slider')
 
 
 @push('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Menubar::List</h1>
+                <h1>Home Slider::List</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Menubar</li>
+                    <li class="breadcrumb-item active">Home Slider</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.home-sliders.create') }}" class="btn btn-sm btn-primary">Add New
-                            Manu Bar</a>
+                        <a type="button" href="{{ route('admin.home-sliders.create') }}" class="btn btn-sm btn-primary">Add New Home Slider</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -64,7 +63,7 @@
                                         <td> {{ $homeSlider->title }}</td>
                                         <td>{{ $homeSlider->description }}</td>
                                         <td>
-                                            <img style="width: 70px"
+                                            <img style="width: 60px"
                                                 src="{{ asset('uploads/sliders/'.$homeSlider->slider_photos) }}"
                                                 alt="not found">
                                         </td>

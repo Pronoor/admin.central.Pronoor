@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Testimonial')
 
 
 @push('css')
@@ -34,44 +34,49 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.testimonial.create')}}" class="btn btn-sm btn-primary">Add New
-                            Testimonial</a>
+                        <a type="button" href="{{ route('admin.testimonial.create') }}" class="btn btn-sm btn-primary">Add New Testimonial</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Quote </th>
+                                    <th>Quotes_given_by</th>
+                                    <th>Quotes_given_by_profession</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>
-                                    <a type="button" href="{{route('admin.testimonial.edit',1)}}"
-                                       class="btn btn-sm btn-primary">Edit</a>
-                                    <a type="button" href="{{route('admin.testimonial.delete',1)}}" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                                @foreach ($testimonials as $testimonial)
+                                    <tr>
+                                        <td>{{ $testimonial->quote }}</td>
+                                        <td>{{ $testimonial->quotes_given_by }}</td>
+                                        <td>{{ $testimonial->quotes_given_by_profession }}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.testimonial.edit', $testimonial->id) }}"
+                                                class="btn btn-sm btn-primary">Edit</a>
+                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.testimonial.delete', $testimonial->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Quote </th>
+                                    <th>Quotes_given_by</th>
+                                    <th>Quotes_given_by_profession</th>
+                                    <th>Action</th>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>
@@ -99,7 +104,7 @@
 
 @section('js')
     <script>
-        $(function () {
+        $(function() {
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

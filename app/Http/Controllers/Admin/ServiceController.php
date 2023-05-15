@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -14,7 +17,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('admin.cms.service.index');
+        return view('admin.cms.service.index',
+        [
+            'services' => Service::all()
+        ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class ServiceController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        //
+        try {
+            Service::create($request->getMenuBarPayload());
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service Added Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -57,7 +68,10 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.cms.service.edit');
+        return view('admin.cms.service.edit',
+        [
+            'services' => Service::find($id)
+        ]);
     }
 
     /**
@@ -67,9 +81,15 @@ class ServiceController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateServiceRequest $request, $id)
     {
-        //
+        try {
+            $service = Service::find($id);
+            $service->update($request->getMenuBarPayload());
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service  update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
@@ -80,6 +100,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $service = Service::findOrFail($id);
+            $service->delete();
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service delete Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 }

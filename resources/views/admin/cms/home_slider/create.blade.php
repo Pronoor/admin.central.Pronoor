@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Home Slider')
 
 
 @push('css')
@@ -21,7 +21,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">User</li>
+                    <li class="breadcrumb-item active">Home Slider</li>
                 </ol>
             </div>
         </div>
@@ -60,7 +60,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Descreption</label>
                                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
-                                    {{-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Photo</label>

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Testimonial')
 
 
 @push('css')
@@ -34,35 +34,38 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.testimonial')}}" class="btn btn-sm btn-primary">Back</a>
+                        <a type="button" href="{{ route('admin.testimonial') }}" class="btn btn-sm btn-primary">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form>
+                        @if (count($errors) > 0)
+                            <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{ route('admin.testimonial.store') }}" id="quickForm">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    <label for="exampleInputEmail1">Quote</label>
+                                    <textarea class="form-control" name="quote" id="quote" rows="3">{{ old('quote') }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="exampleInputPassword1">Quotes given by</label>
+                                    <input type="text" class="form-control" name="quotes_given_by" id="quotes_given_by"
+                                        value="{{ old('quotes_given_by') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    <label for="exampleInputPassword1">Quotes given by profession</label>
+                                    <input type="text" class="form-control" name="quotes_given_by_profession"
+                                        id="quotes_given_by_profession" value="{{ old('quotes_given_by_profession') }}">
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -83,9 +86,52 @@
 @stop
 
 @push('js')
-
+    <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 @endpush
 
 @section('js')
-
+    <script>
+        $(function() {
+            // $.validator.setDefaults({
+            //     submitHandler: function () {
+            //         $('#quickForm').submit();
+            //     }
+            // });
+            $('#quickForm').validate({
+                rules: {
+                    quote: {
+                        required: true,
+                    },
+                    quotes_given_by: {
+                        required: true,
+                    },
+                    quotes_given_by_profession: {
+                        required: true
+                    },
+                },
+                messages: {
+                    quote: {
+                        required: "Please enter a quote",
+                    },
+                    quotes_given_by: {
+                        required: "Please enter a quotes_given_by",
+                    },
+                    quotes_given_by_profession: {
+                        required: "Please enter a quotes_given_by_profession",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 @stop

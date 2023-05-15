@@ -1,11 +1,12 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::AboutUs')
 
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/summernote/summernote-bs4.min.css') }}">
 @endpush
 
 @section('css')
@@ -39,37 +40,34 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form>
+                        @if(count($errors) > 0 )
+                            <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{route('admin.about-us.store')}}" id="quickForm">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                           placeholder="Enter email">
+                                    <label for="title">Title</label>
+                                    <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}" placeholder="Enter title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    <label for="content">Content</label>
+                                    <textarea id="content" name="content">
+                                            Place <em>some</em> <u>
+                                              text</u> <strong>here</strong>
+                                    </textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -86,9 +84,51 @@
 @stop
 
 @push('js')
-
+    <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendor/plugins/summernote/summernote-bs4.min.js') }}"></script>
 @endpush
 
 @section('js')
+    <script>
+        $('#content').summernote({
+            'height': '250px'
+        })
 
+        $(function () {
+            // $.validator.setDefaults({
+            //     submitHandler: function () {
+            //         $('#quickForm').submit();
+            //     }
+            // });
+            $('#quickForm').validate({
+                rules: {
+                    title: {
+                        required: true,
+                    },
+                    content: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    title: {
+                        required: "Please enter a title",
+                    },
+                    content: {
+                        required: "Please enter a content",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 @stop
