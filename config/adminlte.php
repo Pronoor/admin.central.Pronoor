@@ -321,7 +321,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => 'admin/profile/settings/',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -391,6 +391,35 @@ return [
                     'text' => 'Users List',
                     'url' => 'admin/users/',
                 ]
+            ],
+        ],
+        [
+            'text' => 'Tasks',
+            'icon' => 'fas fa-fw fa fa-tasks',
+            'submenu' => [
+                [
+                    'text' => 'Task List',
+                    'url' => 'admin/tasks/',
+                ]
+            ],
+        ],
+        [
+            'text' => 'Inventory',
+            'icon' => 'fas fa-fw fa fa-indent',
+            'label' => 3,
+            'submenu' => [
+                [
+                    'text' => 'Category',
+                    'url' => 'admin/categories/',
+                ],
+                [
+                    'text' => 'Products',
+                    'url' => 'admin/products/',
+                ],
+                [
+                    'text' => 'Orders',
+                    'url' => 'admin/orders/',
+                ],
             ],
         ],
         [
