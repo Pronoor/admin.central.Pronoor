@@ -92,6 +92,7 @@ Route::get('/privacy-policies/{id}/delete/', [PrivacyPolicyController::class, 'd
 
 
 Route::get('/profile/settings/', [UserProfileController::class, 'index'])->name('admin.user-profile');
+Route::post('/profile/settings/update', [UserProfileController::class, 'update'])->name('admin.user-profile.update');
 
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');

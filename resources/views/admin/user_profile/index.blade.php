@@ -38,11 +38,13 @@
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
+                                src="{{ asset('uploads/profile_photos') }}/{{ Auth::user()->profile_photo }}"
+                                alt="User-Profile-Image">
+                            {{-- <img class="profile-user-img img-fluid img-circle"
                                  src=""
-                                 alt="Avatar">
+                                 alt="Avatar"> --}}
                         </div>
-
-                        <h3 class="profile-username text-center">Nina Mcintire</h3>
+                        <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
                         <p class="text-muted text-center">Software Engineer</p>
                     </div>
                     <!-- /.card-body -->
@@ -54,52 +56,69 @@
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#settings"
-                                                    data-toggle="tab">Settings</a>
+                            <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a>
                             </li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
-
                             <div class="tab-pane active" id="settings">
-                                <form class="form-horizontal">
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <ul class="p-0 m-0" style="list-style: none;">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if (session('status'))
+                                    <div class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <p>{{ session('status') }}</p>
+                                    </div>
+                                @endif
+                                <form method="post" action="{{ route('admin.user-profile.update') }}" id="quickForm" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                placeholder="Name" value="{{ Auth::user()->name }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail"
-                                                   placeholder="Email">
+                                            <input type="email" class="form-control" name="email" id="email"
+                                                placeholder="Email" value="{{ Auth::user()->email }}">
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
-                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                        <label for="inputName2" class="col-sm-2 col-form-label">Photo</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience"
-                                                      placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills"
-                                                   placeholder="Skills">
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="profile_photo" id="profile_photo"
+                                                        class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose
+                                                        file</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </form>
@@ -126,19 +145,51 @@
     <script src="{{ asset('vendor/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('vendor/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('vendor/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 @endpush
 
 @section('js')
     <script>
-        $(function () {
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+        $(function() {
+            // $.validator.setDefaults({
+            //     submitHandler: function () {
+            //         $('#quickForm').submit();
+            //     }
+            // });
+            $('#quickForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                    },
+                    profile_photo: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "Please enter a name",
+                    },
+                    email: {
+                        required: "Please enter a email",
+                    },
+                    profile_photo: {
+                        required: "Please enter a password",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
             });
         });
     </script>

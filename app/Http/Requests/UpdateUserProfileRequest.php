@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UpdateUserRequest extends FormRequest
+class UpdateUserProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +29,10 @@ class UpdateUserRequest extends FormRequest
             'name' => [
                 'required', 'min:5'
             ],
-            'user_type' => [
+            'email' => [
                 'required',
             ],
-            'gender' => [
-                'required',
-            ],
-            'description' => [
+            'profile_photo' => [
                 'required',
             ],
         ];
@@ -45,4 +42,5 @@ class UpdateUserRequest extends FormRequest
         return collect($this->validated())
             ->toArray();
     }
+    
 }

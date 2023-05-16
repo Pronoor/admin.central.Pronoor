@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('user_type')->nullable()->after('password');
             $table->string('gender')->nullable()->after('user_type');
             $table->string('description')->nullable()->after('gender');
+            $table->string('profile_photo')->default('default.png')->after('description');
             
         });
     }

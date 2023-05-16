@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserProfileRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class UserProfileController extends Controller
 {
@@ -67,9 +71,48 @@ class UserProfileController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserProfileRequest $request)
     {
-        //
+        try {
+            // if ($request->hasFile('profile_photo')) {
+            //     if(Auth::user()->profile_photo != 'default.png'){
+            //         //delete Old Photo
+            //         $old_photo_location = 'public/uploads/profile_photos/'.Auth::user()->profile_photo;
+            //         unlink(base_path($old_photo_location));
+            //     }
+            //     $uploaded_photo = $request->file('profile_photo');
+            //     $new_upload_name = Auth::user()->id . "." . $uploaded_photo->getClientOriginalExtension();
+            //     $new_upload_location = 'public/uploads/profile_photos/' . $new_upload_name;
+            //     Image::make($uploaded_photo)->resize(200,200)->save(base_path($new_upload_location), 50);
+            //     User::find(Auth::user()->id)->update([
+            //         'name' => $request->name,
+            //         'email' => $request->email,
+            //         'profile_photo' => $new_upload_name,
+            //     ]);
+
+
+                    if ($request->hasFile('profile_photo')) {
+                        if(Auth::user()->profile_photo != 'default.png'){
+                            //delete Old Photo
+                            $old_photo_location = 'public/uploads/profile_photos/'.Auth::user()->profile_photo;
+                            unlink(base_path($old_photo_location));
+                        }
+                        $uploaded_photo = $request->file('profile_photo');
+                        $new_upload_name ="profile_image_". Auth::user()->id . "." . $uploaded_photo->getClientOriginalExtension();
+                        $new_upload_location = 'public/uploads/profile_photos/' . $new_upload_name;
+                        Image::make($uploaded_photo)->resize(360, 360)->save(base_path($new_upload_location), 50);
+                        User::find(Auth::user()->id)->update([
+                            'profile_photo' => $new_upload_name,
+                            'name' => $request->name,
+                            'email' => $request->email,
+                        ]);
+                    }
+            // $user = User::find($id);
+            // $user->update($request->getMenuBarPayload());
+            return redirect()->action([UserProfileController::class, 'index'])->with('status', 'User Update Successfully!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([UserProfileController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
     }
 
     /**
