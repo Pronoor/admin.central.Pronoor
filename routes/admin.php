@@ -17,7 +17,9 @@ Route::get('/', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
 Route::get('/users/', [UserController::class, 'index'])->name('admin.users');
 Route::get('/users/create/', [UserController::class, 'create'])->name('admin.users.create');
+Route::post('/users/store/', [UserController::class, 'store'])->name('admin.users.store');
 Route::get('/users/{id}/edit/', [UserController::class, 'edit'])->name('admin.users.edit');
+Route::post('/users/{id}/update/', [UserController::class, 'update'])->name('admin.users.update');
 Route::get('/users/{id}/delete/', [UserController::class, 'destroy'])->name('admin.users.delete');
 
 
