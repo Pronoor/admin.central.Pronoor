@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChangePasswordController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FooterLinkController;
 use App\Http\Controllers\Admin\HomeController;
@@ -105,6 +106,13 @@ Route::get('/categories/{id}/delete/', [CategoryController::class, 'destroy'])->
 
 Route::get('/password/settings/', [ChangePasswordController::class, 'index'])->name('admin.password');
 Route::post('/password/settings/update/', [ChangePasswordController::class, 'update'])->name('admin.password/update');
+
+Route::get('/contact-us/', [ContactUsController::class, 'index'])->name('admin.contact-us');
+Route::get('/contact-us/create/', [ContactUsController::class, 'create'])->name('admin.contact-us.create');
+Route::post('/contact-us/store/', [ContactUsController::class, 'store'])->name('admin.contact-us.store');
+Route::get('/contact-us/{id}/edit/', [ContactUsController::class, 'edit'])->name('admin.contact-us.edit');
+Route::post('/contact-us/{id}/update/', [ContactUsController::class, 'update'])->name('admin.contact-us.update');
+Route::get('/contact-us/{id}/delete/', [ContactUsController::class, 'destroy'])->name('admin.contact-us.delete');
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
 Route::get('/tasks/create/', [TaskController::class, 'create'])->name('admin.tasks.create');
