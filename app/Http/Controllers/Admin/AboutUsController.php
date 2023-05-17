@@ -43,9 +43,9 @@ class AboutUsController extends Controller
     {
         try {
             AboutUs::create($request->getMenuBarPayload());
-            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'About Us Added Successfully!');;
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'About Us Added Successfully!');
         } catch (\Exception $exception) {
-            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
+            return redirect()->action([AboutUsController::class, 'index'])->with('status', 'Something Went Wrong!');
         }
     }
 

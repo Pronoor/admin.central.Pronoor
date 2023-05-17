@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.inventory.category.index', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.inventory.category.create');
     }
 
     /**
@@ -33,9 +38,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        try {
+            Category::create($request->getMenuBarPayload());
+            return redirect()->action([CategoryController::class, 'index'])->with('status', 'Category Added Successfully!');
+        } catch (\Exception $exception) {
+            return redirect([CategoryController::class, 'index'])->with('status', 'Something Went Wrong!');
+        }
     }
 
     /**
@@ -57,7 +67,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.inventory.category.edit', [
+            'categories' => Category::find($id)
+        ]);
     }
 
     /**
@@ -67,9 +79,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        //
+        try {
+            $category = Category::find($id);
+            $category->update($request->getMenuBarPayload());
+            return redirect()->action([CategoryController::class, 'index'])->with('status', 'Category Update Successfully!');
+        } catch (\Exception $exception) {
+            return redirect([CategoryController::class, 'index'])->with('status', 'Something Went Wrong!');
+        }
     }
 
     /**
@@ -80,6 +98,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete();
+            return redirect()->action([CategoryController::class, 'index'])->with('status', 'Category Delete Successfully!');
+        } catch (\Exception $exception) {
+            return redirect([CategoryController::class, 'index'])->with('status', 'Something Went Wrong!');
+        }
     }
 }

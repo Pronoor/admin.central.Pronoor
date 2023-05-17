@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/summernote/summernote-bs4.min.css') }}">
 @endpush
 
 @section('css')
@@ -59,7 +60,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3">{{ $privacyPolices->description }}</textarea>
+                                    <textarea id="description" name="description">
+                                        {{ $privacyPolices->description }}
+                                    </textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -80,10 +83,14 @@
 
 @push('js')
     <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendor/plugins/summernote/summernote-bs4.min.js') }}"></script>
 @endpush
 
 @section('js')
     <script>
+        $('#description').summernote({
+            'height': '250px'
+        })
         $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {

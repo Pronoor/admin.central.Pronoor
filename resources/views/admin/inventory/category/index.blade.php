@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Privacy Policy')
+@section('title', 'Cms::Category')
 
 
 @push('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Privacy Policy::List</h1>
+                <h1>Category::List</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Privacy Policy</li>
+                    <li class="breadcrumb-item active">Category</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +34,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.privacy-policies.create') }}"
-                            class="btn btn-sm btn-primary">Add New Privacy Policy</a>
+                        <a type="button" href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-primary">Add New
+                            User</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -50,26 +50,37 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Category Name</th>
+                                    <th>Status</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($privacyPolices as $PrivacyPolicy)
-                                <tr>
-                                    <td>{{ $PrivacyPolicy->title }}</td>
-                                    <td>{!! $PrivacyPolicy->description !!}</td>
-                                    <td>
-                                        <a type="button" href="{{ route('admin.privacy-policies.edit', $PrivacyPolicy->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.privacy-policies.delete', $PrivacyPolicy->id) }}" class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                                @foreach ($categories as $categorie)
+                                    <tr>
+                                        <td>{{ $categorie->category_name }}</td>
+                                        <td>
+                                            @if($categorie->status == 1)
+                                                Active
+                                            @else
+                                                UnActive
+                                            @endif
+                                        </td>
+                                        <td>{!! $categorie->description !!}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.categories.edit', $categorie->id) }}"
+                                                class="btn btn-sm btn-primary">Edit</a>
+                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.categories.delete', $categorie->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Category Name</th>
+                                    <th>Status</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>

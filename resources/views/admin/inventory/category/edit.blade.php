@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Privacy Policy')
+@section('title', 'Cms::Category')
 
 
 @push('css')
@@ -17,12 +17,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Privacy Policy::Create</h1>
+                <h1>Category::Update</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Privacy Policy</li>
+                    <li class="breadcrumb-item active">Category</li>
                 </ol>
             </div>
         </div>
@@ -35,42 +35,55 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.privacy-policies') }}"
-                            class="btn btn-sm btn-primary">Back</a>
+                        <a type="button" href="{{route('admin.categories')}}" class="btn btn-sm btn-primary">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @if (count($errors) > 0)
+                        @if(count($errors) > 0 )
                             <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <ul class="p-0 m-0" style="list-style: none;">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
                                     @endforeach
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{ route('admin.privacy-policies.store') }}" id="quickForm">
+                        <form method="post" action="{{route('admin.categories.update',$categories->id)}}" id="quickForm">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" name="title" class="form-control" id="title"
-                                        value="{{ old('title') }}" placeholder="Enter title">
+                                    <label for="category_name">Category Name</label>
+                                    <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Enter category name" value="{{ $categories->category_name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="status">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        {{-- <option value="">Select Option</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">UnActive</option> --}}
+                                        @if ($categories->status == 1)
+                                            <option value="{{ $categories->status }}">Active</option>
+                                            <option value="0">UnActive</option>
+                                        @else
+                                            <option value="{{ $categories->status }}">UnActive</option>
+                                            <option value="1">Active</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Decription</label>
                                     <textarea id="description" name="description">
-                                        Place <em>some</em> <u>
-                                          text</u> <strong>here</strong>
+                                          {{ $categories->description }}
                                     </textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
+
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>
@@ -94,7 +107,7 @@
         $('#description').summernote({
             'height': '250px'
         })
-        $(function() {
+        $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {
             //         $('#quickForm').submit();
@@ -102,7 +115,10 @@
             // });
             $('#quickForm').validate({
                 rules: {
-                    title: {
+                    category_name: {
+                        required: true,
+                    },
+                    status: {
                         required: true,
                     },
                     description: {
@@ -110,22 +126,25 @@
                     },
                 },
                 messages: {
-                    title: {
-                        required: "Please enter a title",
+                    category_name: {
+                        required: "Please enter a name",
+                    },
+                    status: {
+                        required: "Please enter a status",
                     },
                     description: {
                         required: "Please enter a description",
                     },
                 },
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });
