@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FooterLinkController;
 use App\Http\Controllers\Admin\HomeController;
@@ -101,6 +102,9 @@ Route::post('/categories/store/', [CategoryController::class, 'store'])->name('a
 Route::get('/categories/{id}/edit/', [CategoryController::class, 'edit'])->name('admin.categories.edit');
 Route::post('/categories/{id}/update/', [CategoryController::class, 'update'])->name('admin.categories.update');
 Route::get('/categories/{id}/delete/', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
+
+Route::get('/password/settings/', [ChangePasswordController::class, 'index'])->name('admin.password');
+Route::post('/password/settings/update/', [ChangePasswordController::class, 'update'])->name('admin.password/update');
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
 Route::get('/tasks/create/', [TaskController::class, 'create'])->name('admin.tasks.create');
