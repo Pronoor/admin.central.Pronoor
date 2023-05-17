@@ -176,7 +176,7 @@
                         required: "Please enter a email",
                     },
                     profile_photo: {
-                        required: "Please enter a password",
+                        required: "Please enter a photo",
                     },
                 },
                 errorElement: 'span',

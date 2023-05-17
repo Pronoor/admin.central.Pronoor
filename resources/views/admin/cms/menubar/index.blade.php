@@ -54,6 +54,7 @@
                                     <th>Title</th>
                                     <th>Url</th>
                                     <th>Order</th>
+                                    <th>Content</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,6 +64,7 @@
                                         <td> {{ $menu->title }}</td>
                                         <td>{{ $menu->url }}</td>
                                         <td>{{ $menu->order }}</td>
+                                        <td>{!! $menu->content !!}</td>
                                         <td>
                                             <a type="button" href="{{ route('admin.menus.edit', $menu->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
@@ -79,6 +81,7 @@
                                     <th>Title</th>
                                     <th>Url</th>
                                     <th>Order</th>
+                                    <th>Content</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

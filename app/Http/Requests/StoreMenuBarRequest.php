@@ -26,20 +26,24 @@ class StoreMenuBarRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
+                'required', 'min:5'
             ],
             'url' => [
-                'required|url|unique:footer_links'
+                'required'
             ],
             'order' => [
                 'required', 'integer', 'max:12', 'min:1'
+            ],
+            'content' => [
+                'required',
             ],
         ];
     }
 
     public function getMenuBarPayload()
     {
-        return collect($this->validated())
-            ->toArray();
+        $data = collect($this->validated())->toArray();
+        $data['content'] = (collect($this->validated())->toArray()['content']);
+        return $data;
     }
 }

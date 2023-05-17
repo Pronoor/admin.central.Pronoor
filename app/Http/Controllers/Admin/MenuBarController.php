@@ -50,7 +50,6 @@ class MenuBarController extends Controller
             return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
 
-
     }
 
     /**
@@ -90,11 +89,8 @@ class MenuBarController extends Controller
     public function update(UpdateMenuBarRequest $request, $id)
     {
         try {
-            MenuBar::find($id)->update($request->getMenuBarPayload([
-                'title' =>$request->title,
-                'url' =>$request->url,
-                'order' =>$request->order
-            ]));
+            $menuBar = MenuBar::find($id);
+            $menuBar->find($id)->update($request->getMenuBarPayload());
             return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Menu Updated Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([MenuBarController::class, 'index'])->with('status', 'Something Went Wrong!');;

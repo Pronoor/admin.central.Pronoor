@@ -34,7 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.terms-conditions.create') }}" class="btn btn-sm btn-primary">Add New About Us</a>
+                        <a type="button" href="{{ route('admin.terms-conditions.create') }}" class="btn btn-sm btn-primary">Add New Terms & Condition</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

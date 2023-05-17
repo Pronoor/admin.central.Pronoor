@@ -9,5 +9,5 @@ class MenuBar extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'url', 'order'];
+    protected $fillable = ['title', 'url', 'order', 'content'];
 }
