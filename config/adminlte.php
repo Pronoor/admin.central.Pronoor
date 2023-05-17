@@ -326,7 +326,7 @@ return [
         ],
         [
             'text' => 'change_password',
-            'url' => 'admin/settings',
+            'url' => 'admin/password/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
         /* [
@@ -468,7 +468,7 @@ return [
         ],
         [
             'text' => 'Contact Us',
-            'url' => 'admin/settings',
+            'url' => 'admin/contact-us',
             'icon' => 'fas fa-fw fa fa-envelope',
         ],
     ],

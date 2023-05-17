@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Privacy Policy')
+@section('title', 'Cms::Contact Us')
 
 
 @push('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Privacy Policy::List</h1>
+                <h1>Contact Us::List</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Privacy Policy</li>
+                    <li class="breadcrumb-item active">Contact Us</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.privacy-policies.create') }}"
-                            class="btn btn-sm btn-primary">Add New Privacy Policy</a>
+                        <a type="button" href="{{ route('admin.contact-us.create') }}" class="btn btn-sm btn-primary">Add New Contact Us</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -50,27 +49,44 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Fisrt Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Replayed</th>
+                                    <th>Message</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($privacyPolices as $PrivacyPolicy)
-                                <tr>
-                                    <td>{{ $PrivacyPolicy->title }}</td>
-                                    <td>{!! $PrivacyPolicy->description !!}</td>
-                                    <td>
-                                        <a type="button" href="{{ route('admin.privacy-policies.edit', $PrivacyPolicy->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.privacy-policies.delete', $PrivacyPolicy->id) }}" class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                                @foreach ($contactUses as $contactUs)
+                                    <tr>
+                                        <td>{{ $contactUs->first_name }}</td>
+                                        <td>{{ $contactUs->last_name }}</td>
+                                        <td>{{ $contactUs->email }}</td>
+                                        <td>
+                                            @if($contactUs->replayed == 1)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
+                                        </td>
+                                        <td>{!! $contactUs->message_body !!}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.contact-us.edit', $contactUs->id) }}"
+                                                class="btn btn-sm btn-primary">Edit</a>
+                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.contact-us.delete', $contactUs->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Fisrt Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Replayed</th>
+                                    <th>Message</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

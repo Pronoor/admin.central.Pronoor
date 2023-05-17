@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChangePasswordController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FooterLinkController;
 use App\Http\Controllers\Admin\HomeController;
@@ -19,7 +22,9 @@ Route::get('/', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
 Route::get('/users/', [UserController::class, 'index'])->name('admin.users');
 Route::get('/users/create/', [UserController::class, 'create'])->name('admin.users.create');
+Route::post('/users/store/', [UserController::class, 'store'])->name('admin.users.store');
 Route::get('/users/{id}/edit/', [UserController::class, 'edit'])->name('admin.users.edit');
+Route::post('/users/{id}/update/', [UserController::class, 'update'])->name('admin.users.update');
 Route::get('/users/{id}/delete/', [UserController::class, 'destroy'])->name('admin.users.delete');
 
 
@@ -90,7 +95,24 @@ Route::get('/privacy-policies/{id}/delete/', [PrivacyPolicyController::class, 'd
 
 
 Route::get('/profile/settings/', [UserProfileController::class, 'index'])->name('admin.user-profile');
+Route::post('/profile/settings/update/', [UserProfileController::class, 'update'])->name('admin.user-profile.update');
 
+Route::get('/categories/', [CategoryController::class, 'index'])->name('admin.categories');
+Route::get('/categories/create/', [CategoryController::class, 'create'])->name('admin.categories.create');
+Route::post('/categories/store/', [CategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('/categories/{id}/edit/', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+Route::post('/categories/{id}/update/', [CategoryController::class, 'update'])->name('admin.categories.update');
+Route::get('/categories/{id}/delete/', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
+
+Route::get('/password/settings/', [ChangePasswordController::class, 'index'])->name('admin.password');
+Route::post('/password/settings/update/', [ChangePasswordController::class, 'update'])->name('admin.password/update');
+
+Route::get('/contact-us/', [ContactUsController::class, 'index'])->name('admin.contact-us');
+Route::get('/contact-us/create/', [ContactUsController::class, 'create'])->name('admin.contact-us.create');
+Route::post('/contact-us/store/', [ContactUsController::class, 'store'])->name('admin.contact-us.store');
+Route::get('/contact-us/{id}/edit/', [ContactUsController::class, 'edit'])->name('admin.contact-us.edit');
+Route::post('/contact-us/{id}/update/', [ContactUsController::class, 'update'])->name('admin.contact-us.update');
+Route::get('/contact-us/{id}/delete/', [ContactUsController::class, 'destroy'])->name('admin.contact-us.delete');
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
 Route::get('/tasks/create/', [TaskController::class, 'create'])->name('admin.tasks.create');

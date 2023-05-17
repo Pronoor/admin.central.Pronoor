@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::User')
 
 
 @push('css')
@@ -34,44 +34,53 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.users.create')}}" class="btn btn-sm btn-primary">Add New
+                        <a type="button" href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">Add New
                             User</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>User Type</th>
+                                    <th>Gender</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>
-                                    <a type="button" href="{{route('admin.users.edit',1)}}"
-                                       class="btn btn-sm btn-primary">Edit</a>
-                                    <a type="button" href="{{route('admin.users.delete',1)}}" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                                @foreach ($users as $user)
+                                    <tr>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->user_type }}</td>
+                                        <td>{{ $user->gender }}</td>
+                                        <td>{{ $user->description }}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.users.edit', $user->id) }}"
+                                                class="btn btn-sm btn-primary">Edit</a>
+                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.users.delete', $user->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>User Type</th>
+                                    <th>Gender</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>
@@ -99,7 +108,7 @@
 
 @section('js')
     <script>
-        $(function () {
+        $(function() {
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Privacy Policy')
+@section('title', 'Cms::Contact Us')
 
 
 @push('css')
@@ -17,12 +17,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Privacy Policy::Update</h1>
+                <h1>Contact Us::Update</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Privacy Policy</li>
+                    <li class="breadcrumb-item active">Contact Us</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{route('admin.privacy-policies')}}" class="btn btn-sm btn-primary">Back</a>
+                        <a type="button" href="{{route('admin.contact-us')}}" class="btn btn-sm btn-primary">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -51,21 +51,42 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{route('admin.privacy-policies.update',$privacyPolices->id)}}" id="quickForm">
+                        <form method="post" action="{{route('admin.contact-us.update',$contactUses->id)}}" id="quickFor">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" name="title" class="form-control" id="title" value="{{ $privacyPolices->title }}" placeholder="Enter title">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $contactUses->first_name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea id="description" name="description">
-                                        {{ $privacyPolices->description }}
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter last name" value="{{ $contactUses->last_name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" value="{{ $contactUses->email }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="replayed">Replayed</label>
+                                    <select name="replayed" id="replayed" class="form-control">
+                                        @if ($contactUses->replayed == 1)
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        @else
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message_body">Message Body</label>
+                                    <textarea id="message_body" name="message_body">
+                                       {{ $contactUses->message_body }}
                                     </textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>
@@ -88,7 +109,7 @@
 
 @section('js')
     <script>
-        $('#description').summernote({
+        $('#message_body').summernote({
             'height': '250px'
         })
         $(function () {
@@ -99,19 +120,37 @@
             // });
             $('#quickForm').validate({
                 rules: {
-                    title: {
+                    first_name: {
                         required: true,
                     },
-                    description: {
+                    last_name: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                    },
+                    replayed: {
+                        required: true,
+                    },
+                    message_body: {
                         required: true,
                     },
                 },
                 messages: {
-                    title: {
-                        required: "Please enter a title",
+                    first_name: {
+                        required: "Please enter first name",
                     },
-                    description: {
-                        required: "Please enter a description",
+                    last_name: {
+                        required: "Please enter last status",
+                    },
+                    email: {
+                        required: "Please enter email",
+                    },
+                    replayed: {
+                        required: "Please enter replayed",
+                    },
+                    message_body: {
+                        required: "Please enter message ",
                     },
                 },
                 errorElement: 'span',
