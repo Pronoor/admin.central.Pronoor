@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/summernote/summernote-bs4.min.css') }}">
+
 @endpush
 
 @section('css')
@@ -54,19 +56,25 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Menu Title</label>
+                                    <label for="title">Title</label>
                                     <input type="text" name="title" class="form-control" id="title" value="{{ $menuBars->title }}"
                                            placeholder="Enter title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="url">Menu Url</label>
+                                    <label for="url">Url</label>
                                     <input type="text" name="url" class="form-control" id="url" value="{{ $menuBars->url }}"
                                            placeholder="Enter url">
                                 </div>
                                 <div class="form-group">
-                                    <label for="order">Menu Order</label>
+                                    <label for="order">Order</label>
                                     <input type="text" name="order" class="form-control" id="order" value="{{ $menuBars->order }}"
                                            placeholder="Enter order">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">Content</label>
+                                    <textarea id="content" name="content">
+                                        {{ $menuBars->content }}
+                                    </textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -88,10 +96,14 @@
 
 @push('js')
     <script src="{{ asset('vendor/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendor/plugins/summernote/summernote-bs4.min.js') }}"></script>
 @endpush
 
 @section('js')
     <script>
+        $('#content').summernote({
+            'height': '250px'
+        })
         $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {
@@ -109,6 +121,9 @@
                     order: {
                         required: true
                     },
+                    content: {
+                        required: true
+                    },
                 },
                 messages: {
                     title: {
@@ -116,8 +131,9 @@
                     },
                     url: {
                         required: "Please enter a url",
-                    }, order: {
-                        required: "Please enter a order",
+                    },
+                    content: {
+                        required: "Please enter a content",
                     },
                 },
                 errorElement: 'span',

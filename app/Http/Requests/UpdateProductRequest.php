@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreMenuBarRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,25 +25,26 @@ class StoreMenuBarRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
+            'category_id' => [
+                'required',
+            ],
+            'name' => [
                 'required', 'min:5'
             ],
-            'url' => [
-                'required'
+            'description' => [
+                'required', 'min:15',
             ],
-            'order' => [
-                'required', 'integer', 'max:12', 'min:1'
-            ],
-            'content' => [
+            'price' => [
                 'required',
+            ],
+            'discount' => [
+                'required'
             ],
         ];
     }
-
     public function getMenuBarPayload()
     {
-        $data = collect($this->validated())->toArray();
-        $data['content'] = (collect($this->validated())->toArray()['content']);
-        return $data;
+        return collect($this->validated())
+            ->toArray();
     }
 }

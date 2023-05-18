@@ -29,7 +29,7 @@ class StoreHomeSliderRequest extends FormRequest
                 'required','min:5',
             ],
             'description' => [
-                'required','min:50',
+                'required','min:15',
             ],
             'slider_photos' => [
                 'required','mimes:jpg',

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Cms::Menubar')
+@section('title', 'Cms::Products')
 
 
 @push('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Menu Bar::List</h1>
+                <h1>Products::List</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Menu Bar</li>
+                    <li class="breadcrumb-item active">Products</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.menus.create') }}" class="btn btn-sm btn-primary">Add New
-                            Manu Bar</a>
+                        <a type="button" href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">Add New Product</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -47,41 +46,48 @@
                                 <p>{{ session('status') }}</p>
                             </div>
                         @endif
-
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Url</th>
-                                    <th>Order</th>
-                                    <th>Content</th>
+                                    <th>Category Name</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Discount</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($menus as $menu)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td> {{ $menu->title }}</td>
-                                        <td>{{ $menu->url }}</td>
-                                        <td>{{ $menu->order }}</td>
-                                        <td>{!! $menu->content !!}</td>
+                                        <td>{{ $product->RelationCategory->category_name }}</td>
+                                        <td>{{ $product->name  }}</td>
+                                        <td>{!! $product->description !!}</td>
+                                        <td>{{ $product->price }}</td>
+                                        <td>{{ $product->discount }}</td>
                                         <td>
-                                            <a type="button" href="{{ route('admin.menus.edit', $menu->id) }}"
+                                            <img style="width: 60px"
+                                                src="{{ asset('uploads/product_photos/'.$product->image) }}"
+                                                alt="not found">
+                                        </td>
+                                        <td>
+                                            <a type="button" href="{{ route('admin.products.edit', $product->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
-                                            <a onclick="return confirm('Are you sure to delete')" type="button"
-                                                href="{{ route('admin.menus.delete', $menu->id) }}"
+                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.products.delete', $product->id) }}"
                                                 class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Url</th>
-                                    <th>Order</th>
-                                    <th>Content</th>
+                                    <th>Category Name</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Discount</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
