@@ -7,8 +7,6 @@ use App\Http\Requests\StoreHomeSliderRequest;
 use App\Http\Requests\UpdateHomeSliderRequest;
 use App\Models\HomeSlider;
 use Intervention\Image\Facades\Image;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class HomeSliderController extends Controller
 {
@@ -45,10 +43,7 @@ class HomeSliderController extends Controller
     {
         // print_r($request->all());
         try {
-            $home_slider_id = HomeSlider::insertGetId($request->getMenuBarPayload([
-            'title' => $request->title,
-            'description' => $request->description,
-            ]));
+            $home_slider_id = HomeSlider::insertGetId($request->getMenuBarPayload());
             if ($request->hasFile('slider_photos')) {
                 $uploaded_photo = $request->file('slider_photos');
                 $new_upload_name ="slider_image_". $home_slider_id . "." . $uploaded_photo->getClientOriginalExtension();
@@ -99,10 +94,7 @@ class HomeSliderController extends Controller
     public function update(UpdateHomeSliderRequest $request, $id)
     {
         try {
-            HomeSlider::find($id)->update($request->getMenuBarPayload([
-                'title' =>$request->title,
-                'description' =>$request->description,
-            ]));
+            HomeSlider::find($id)->update($request->getMenuBarPayload());
             if ($request->hasFile('slider_photos')) {
                 $uploaded_photo = $request->file('slider_photos');
                 $new_upload_name ="slider_image_". $id . "." . $uploaded_photo->getClientOriginalExtension();

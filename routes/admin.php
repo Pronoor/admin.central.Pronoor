@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomeSliderController;
 use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TermsConditionController;
@@ -97,6 +98,9 @@ Route::get('/privacy-policies/{id}/delete/', [PrivacyPolicyController::class, 'd
 Route::get('/profile/settings/', [UserProfileController::class, 'index'])->name('admin.user-profile');
 Route::post('/profile/settings/update/', [UserProfileController::class, 'update'])->name('admin.user-profile.update');
 
+Route::get('/password/settings/', [ChangePasswordController::class, 'index'])->name('admin.password');
+Route::post('/password/settings/update/', [ChangePasswordController::class, 'update'])->name('admin.password/update');
+
 Route::get('/categories/', [CategoryController::class, 'index'])->name('admin.categories');
 Route::get('/categories/create/', [CategoryController::class, 'create'])->name('admin.categories.create');
 Route::post('/categories/store/', [CategoryController::class, 'store'])->name('admin.categories.store');
@@ -104,8 +108,13 @@ Route::get('/categories/{id}/edit/', [CategoryController::class, 'edit'])->name(
 Route::post('/categories/{id}/update/', [CategoryController::class, 'update'])->name('admin.categories.update');
 Route::get('/categories/{id}/delete/', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
 
-Route::get('/password/settings/', [ChangePasswordController::class, 'index'])->name('admin.password');
-Route::post('/password/settings/update/', [ChangePasswordController::class, 'update'])->name('admin.password/update');
+Route::get('/products/', [ProductController::class, 'index'])->name('admin.products');
+Route::get('/products/create/', [ProductController::class, 'create'])->name('admin.products.create');
+Route::post('/products/store/', [ProductController::class, 'store'])->name('admin.products.store');
+Route::get('/products/{id}/edit/', [ProductController::class, 'edit'])->name('admin.products.edit');
+Route::post('/products/{id}/update/', [ProductController::class, 'update'])->name('admin.products.update');
+Route::get('/products/{id}/delete/', [ProductController::class, 'destroy'])->name('admin.products.delete');
+
 
 Route::get('/contact-us/', [ContactUsController::class, 'index'])->name('admin.contact-us');
 Route::get('/contact-us/create/', [ContactUsController::class, 'create'])->name('admin.contact-us.create');

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreHomeSliderRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,29 @@ class StoreHomeSliderRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
-                'required','min:5',
+            'category_id' => [
+                'required',
+            ],
+            'name' => [
+                'required', 'min:5'
             ],
             'description' => [
-                'required','min:15',
+                'required', 'min:15',
             ],
-            'slider_photos' => [
-                'required','mimes:jpg',
+            'meta_name' => [
+                'required', 'min:5'
+            ],
+            'meta_description' => [
+                'required', 'min:15',
+            ],
+            'price' => [
+                'required', 'integer',
+            ],
+            'discount' => [
+                'required', 'integer',
+            ],
+            'image' => [
+                'required',
             ],
         ];
     }
