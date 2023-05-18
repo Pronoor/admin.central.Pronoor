@@ -45,7 +45,7 @@
                                  alt="Avatar"> --}}
                         </div>
                         <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
-                        <p class="text-muted text-center">Software Engineer</p>
+                        <p class="text-muted text-center">{{ Auth::user()->profession }}</p>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -89,17 +89,24 @@
                                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="name" id="name"
-                                                placeholder="Name" value="{{ Auth::user()->name }}">
+                                                placeholder="Enter Name" value="{{ Auth::user()->name }}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Profession</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="profession" id="profession"
+                                                placeholder="Enter profession" value="{{ Auth::user()->profession }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" name="email" id="email"
-                                                placeholder="Email" value="{{ Auth::user()->email }}">
+                                                placeholder="Enter email" value="{{ Auth::user()->email }}">
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label for="inputName2" class="col-sm-2 col-form-label">Photo</label>
                                         <div class="col-sm-10">
@@ -164,7 +171,7 @@
                     email: {
                         required: true,
                     },
-                    profile_photo: {
+                    profession: {
                         required: true,
                     },
                 },
@@ -175,8 +182,8 @@
                     email: {
                         required: "Please enter a email",
                     },
-                    profile_photo: {
-                        required: "Please enter a photo",
+                    profession: {
+                        required: "Please enter a profession",
                     },
                 },
                 errorElement: 'span',

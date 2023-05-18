@@ -55,6 +55,17 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        placeholder="Enter product name" value="{{ $products->name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Product Description</label>
+                                    <textarea class="form-control" name="description" id="description">
+                                        {{ $products->description }}
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="category_id">Category Name</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         <option value="">-Select One-</option>
@@ -65,31 +76,22 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Product Name</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        placeholder="Enter product name" value="{{ $products->name }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description">
-                                        {{ $products->description }}
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price">Product Price</label>
                                     <input type="text" class="form-control" name="price" id="price"
                                         placeholder="Enter price" value="{{ $products->price }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="discount">Discount</label>
+                                    <label for="discount">Product Discount</label>
                                     <input type="text" class="form-control" name="discount" id="discount"
                                         placeholder="Enter discount" value="{{ $products->discount }}">
                                 </div>
                                 <div class="form-group">
-                                    <img style="width: 60px"
+                                    <div>
+                                        <img style="width: 60px"
                                                 src="{{ asset('uploads/product_photos/'.$products->image) }}"
                                                 alt="not found">
-                                    <label for="image" class="col-sm-2 col-form-label">Photo</label>
+                                    </div>
+                                    <label for="image" class="col-sm-2 col-form-label">Product Photo</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="image" id="image"

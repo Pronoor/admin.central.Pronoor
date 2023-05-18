@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateUserProfileRequest extends FormRequest
 {
@@ -32,7 +31,7 @@ class UpdateUserProfileRequest extends FormRequest
             'email' => [
                 'required',
             ],
-            'profile_photo' => [
+            'profession' => [
                 'required',
             ],
         ];
