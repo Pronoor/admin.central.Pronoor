@@ -94,7 +94,6 @@ class TaskController extends Controller
         try {
             // dd($request);
             $task =Task::find($id);
-            
             $task->update([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -102,7 +101,6 @@ class TaskController extends Controller
                 'assignee' => $request->assignee,
                 'deadline' => $request->deadline,
             ]);
-            dd($task);
             return redirect()->action([TaskController::class, 'index'])->with('status', 'Task Update Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([TaskController::class, 'index'])->with('status', 'Something Went Wrong!');;
