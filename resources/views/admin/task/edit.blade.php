@@ -31,7 +31,7 @@
 
 @section('content')
     <section class="content">
-        <form action="{{ route('admin.tasks.store') }}" method="post" id="quickForm">
+        <form action="{{ route('admin.tasks.update', $tasks->id) }}" method="post" id="quickForm">
             @csrf
             <div class="row">
                 <div class="col-12">
@@ -68,22 +68,41 @@
                             <div class="form-group">
                                 <label for="name">Task Name</label>
                                 <input type="text" name="name" id="name" class="form-control"
-                                    placeholder="Enter name">
+                                    placeholder="Enter name" value="{{ $tasks->name }}">
                             </div>
                             <div class="form-group">
                                 <label for="description">Task Description</label>
                                 <textarea id="description" name="description">
-                                    Place <em>some</em> <u>
-                                      text</u> <strong>here</strong>
+                                    {{ $tasks->description }}
                                 </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select id="status" name="status" class="form-control">
-                                    <option selected value="To Do">To Do</option>
-                                    <option value="On Hold">On Hold</option>
-                                    <option value="Canceled">Canceled</option>
-                                    <option value="Success">Success</option>
+                                    @if ($tasks->status == 'To Do')
+                                        <option value="To Do">To Do</option>
+                                        <option value="On Hold">On Hold</option>
+                                        <option value="Canceled">Canceled</option>
+                                        <option value="Success">Success</option>
+                                    @endif
+                                    @if ($tasks->status == 'On Hold')
+                                        <option value="On Hold">On Hold</option>
+                                        <option value="To Do">To Do</option>
+                                        <option value="Canceled">Canceled</option>
+                                        <option value="Success">Success</option>
+                                    @endif
+                                    @if ($tasks->status == 'Canceled')
+                                        <option value="Canceled">Canceled</option>
+                                        <option value="To Do">To Do</option>
+                                        <option value="On Hold">On Hold</option>
+                                        <option value="Success">Success</option>
+                                    @endif
+                                    @if ($tasks->status == 'Success')
+                                        <option value="Success">Success</option>
+                                        <option value="To Do">To Do</option>
+                                        <option value="On Hold">On Hold</option>
+                                        <option value="Canceled">Canceled</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -105,15 +124,16 @@
                             <div class="form-group">
                                 <label for="assignee">Assignee</label>
                                 <select id="assignee" name="assignee" class="form-control">
-                                    <option selected disabled>Select One</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        <option {{ ($user->id == $tasks->assignee) ? "selected":"" }}
+                                            value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="deadline">Deadline</label>
-                                <input type="date" name="deadline" id="deadline" class="form-control">
+                                <input type="date" name="deadline" id="deadline" class="form-control"
+                                    value="{{ $tasks->deadline }}">
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -121,7 +141,7 @@
                     <!-- /.card -->
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
         </form>
         </div>
