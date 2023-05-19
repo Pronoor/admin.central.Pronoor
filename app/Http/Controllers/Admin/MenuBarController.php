@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMenuBarRequest;
 use App\Http\Requests\UpdateMenuBarRequest;
-use App\Http\Resources\MenuBarResource;
 use App\Models\MenuBar;
 
 class MenuBarController extends Controller
