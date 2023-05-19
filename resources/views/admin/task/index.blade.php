@@ -128,5 +128,29 @@
                 "responsive": true,
             });
         });
+
+        $('#pdf_file_upload').unbind().bind('click', function () {
+            var image_id = $('#image_id').val();
+            $.ajax({
+                url: 'process/file-availability/' + image_id, // Replace with your API endpoint URL
+                method: 'GET', // Replace with the HTTP method you want to use (e.g., GET, POST, etc.)
+                data: {},
+                success: function (response) {
+                    if (response.success) {
+                        var replace = confirm("A file is already uploaded. Do you want to replace it?");
+                        if (replace) {
+                            $('#pdf_form').submit();
+                        }
+                    }else{
+                        $('#pdf_form').submit();
+                    }
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        });
+
+
     </script>
 @stop
