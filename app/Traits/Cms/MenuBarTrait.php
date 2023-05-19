@@ -12,15 +12,9 @@ trait MenuBarTrait
         return MenuBar::all();
     }
 
-    public function showMenu($postId)
+    public function showMenu($menuId)
     {
-        try {
-            $menu = MenuBar::findOrFail($postId);
-
-            return response()->json($menu);
-        } catch (ModelNotFoundException $exception) {
-            return response()->json(['error' => 'menu not found'], 404);
-        }
+        return MenuBar::findOrFail($menuId);
     }
 
     public function updateMenu($menuId, array $data)

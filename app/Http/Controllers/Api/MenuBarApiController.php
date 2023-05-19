@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Cms\MenuBarResource;
 use App\Http\Resources\Cms\MenuCollection;
 use App\Models\MenuBar;
 use App\Traits\Cms\MenuBarTrait;
@@ -21,9 +22,9 @@ class MenuBarApiController extends Controller
     {
         try {
             $menus = $this->getAllMenus();
-            $menus = new MenuCollection($menus);
+            $menusCollection = new MenuCollection($menus);
             return response()->json(
-                $menus, 200
+                $menusCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -64,7 +65,19 @@ class MenuBarApiController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $menu = new MenuBarResource($this->showMenu($id));
+            return response()->json(
+                $menu, 200
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'message' => 'Something went wrong!',
+                    'error' => $exception->getMessage()
+                ], 403
+            );
+        }
     }
 
     /**

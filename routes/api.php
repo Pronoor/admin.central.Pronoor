@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/menus/', [MenuBarApiController::class, 'index'])->name('front.menus');
+Route::resource('menus', MenuBarApiController::class);
