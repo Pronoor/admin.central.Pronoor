@@ -74,6 +74,8 @@ class UserProfileController extends Controller
     public function update(UpdateUserProfileRequest $request)
     {
         try {
+              $users = User::find(Auth::user()->id);
+              $users->update($request->getMenuBarPayload());
             if ($request->hasFile('profile_photo')) {
                 if (Auth::user()->profile_photo != 'default.png') {
                     //delete Old Photo
@@ -86,8 +88,6 @@ class UserProfileController extends Controller
                 Image::make($uploaded_photo)->resize(360, 360)->save(base_path($new_upload_location), 50);
                 User::find(Auth::user()->id)->update([
                     'profile_photo' => $new_upload_name,
-                    'name' => $request->name,
-                    'email' => $request->email,
                 ]);
             }
             return redirect()->action([UserProfileController::class, 'index'])->with('status', 'User Update Successfully!');

@@ -55,6 +55,31 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        placeholder="Enter product name" value="{{ old('name') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Product Description</label>
+                                    <textarea class="form-control" name="description" id="description">
+                                        Place <em>some</em> <u>
+                                        text</u> <strong>here</strong>
+                                    </textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="meta_description">Meta Description (Optional)</label>
+                                    <textarea class="form-control" name="meta_description" id="meta_description">
+                                        Place <em>some</em> <u>
+                                        text</u> <strong>here</strong>
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="meta_name">Meta Name (Optional)</label>
+                                    <input type="text" class="form-control" name="meta_name" id="meta_name"
+                                        placeholder="Enter meta name" value="{{ old('meta_name') }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="category_id">Category Name</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         <option value="">-Select One-</option>
@@ -65,41 +90,17 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Product Name</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        placeholder="Enter product name" value="{{ old('name') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description">
-                                        Place <em>some</em> <u>
-                                        text</u> <strong>here</strong>
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="meta_name">Meta Name</label>
-                                    <input type="text" class="form-control" name="meta_name" id="meta_name"
-                                        placeholder="Enter meta name" value="{{ old('meta_name') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="meta_description">Meta Description</label>
-                                    <textarea class="form-control" name="meta_description" id="meta_description">
-                                        Place <em>some</em> <u>
-                                        text</u> <strong>here</strong>
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price">Product Price</label>
                                     <input type="text" class="form-control" name="price" id="price"
                                         placeholder="Enter price" value="{{ old('price') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="discount">Discount</label>
+                                    <label for="discount">Product Discount</label>
                                     <input type="text" class="form-control" name="discount" id="discount"
                                         placeholder="Enter discount" value="{{ old('discount') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="image" class="col-sm-2 col-form-label">Photo</label>
+                                    <label for="image" class="col-sm-2 col-form-label">Product Photo</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="image" id="image"
