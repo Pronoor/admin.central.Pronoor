@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AboutUsApiController;
+use App\Http\Controllers\Api\FaqApiController;
 use App\Http\Controllers\Api\FooterLinksApiController;
 use App\Http\Controllers\Api\MenuBarApiController;
 use App\Http\Controllers\Api\ServiceApiController;
@@ -30,3 +31,4 @@ Route::resource('footer-links', FooterLinksApiController::class);
 Route::resource('about-us', AboutUsApiController::class);
 Route::resource('testimonilas', TestimonialsApiController::class);
 Route::resource('services', ServiceApiController::class);
+Route::resource('faqs', FaqApiController::class);
