@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\MenuBarResource;
-use App\Http\Resources\Cms\MenuCollection;
-use App\Traits\Cms\MenuBarTrait;
+use App\Http\Resources\Cms\PrivacyPolicyCollection;
+use App\Http\Resources\Cms\PrivacyPolicyResource;
+use App\Traits\Cms\PrivacyPolicyTrait;
 use Illuminate\Http\Request;
 
-class MenuBarApiController extends Controller
+class PrivacyPolicyApiController extends Controller
 {
-    use  MenuBarTrait;
+    use  PrivacyPolicyTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class MenuBarApiController extends Controller
     public function index()
     {
         try {
-            $menus = $this->getAllMenus();
-            $menusCollection = new MenuCollection($menus);
+            $privacies = $this->getAllPrivacy();
+            $privacyPolicyCollection = new PrivacyPolicyCollection($privacies);
             return response()->json(
-                $menusCollection, 200
+                $privacyPolicyCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -53,7 +53,7 @@ class MenuBarApiController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -65,9 +65,9 @@ class MenuBarApiController extends Controller
     public function show($id)
     {
         try {
-            $menu = new MenuBarResource($this->showMenu($id));
+            $privacies = new PrivacyPolicyResource($this->showPrivacy($id));
             return response()->json(
-                $menu, 200
+                $privacies, 200
             );
         } catch (\Exception $exception) {
             return response()->json(

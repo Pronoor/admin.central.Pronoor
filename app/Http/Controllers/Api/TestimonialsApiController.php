@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\MenuBarResource;
-use App\Http\Resources\Cms\MenuCollection;
-use App\Traits\Cms\MenuBarTrait;
+use App\Http\Resources\Cms\TestimonialsCollection;
+use App\Http\Resources\Cms\TestimonilasResource;
+use App\Traits\Cms\TestimonialsTrait;
 use Illuminate\Http\Request;
 
-class MenuBarApiController extends Controller
+class TestimonialsApiController extends Controller
 {
-    use  MenuBarTrait;
+    use  TestimonialsTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class MenuBarApiController extends Controller
     public function index()
     {
         try {
-            $menus = $this->getAllMenus();
-            $menusCollection = new MenuCollection($menus);
+            $testimonilas = $this->getAllTestimonial();
+            $testimonialsCollection = new TestimonialsCollection($testimonilas);
             return response()->json(
-                $menusCollection, 200
+                $testimonialsCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -53,7 +53,7 @@ class MenuBarApiController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -65,9 +65,9 @@ class MenuBarApiController extends Controller
     public function show($id)
     {
         try {
-            $menu = new MenuBarResource($this->showMenu($id));
+            $testimonials = new TestimonilasResource($this->showTestimonial($id));
             return response()->json(
-                $menu, 200
+                $testimonials, 200
             );
         } catch (\Exception $exception) {
             return response()->json(

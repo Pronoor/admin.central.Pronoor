@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\AboutUsApiController;
+use App\Http\Controllers\Api\FaqApiController;
 use App\Http\Controllers\Api\FooterLinksApiController;
 use App\Http\Controllers\Api\MenuBarApiController;
+use App\Http\Controllers\Api\PrivacyPolicyApiController;
+use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\SliderApiController;
+use App\Http\Controllers\Api\TermsConditionApiController;
+use App\Http\Controllers\Api\TestimonialsApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +30,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('menus', MenuBarApiController::class);
 Route::resource('sliders', SliderApiController::class);
 Route::resource('footer-links', FooterLinksApiController::class);
+Route::resource('about-us', AboutUsApiController::class);
+Route::resource('testimonilas', TestimonialsApiController::class);
+Route::resource('services', ServiceApiController::class);
+Route::resource('faqs', FaqApiController::class);
+Route::resource('terms-condition', TermsConditionApiController::class);
+Route::resource('privacy-policy', PrivacyPolicyApiController::class);

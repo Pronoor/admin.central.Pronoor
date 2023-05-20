@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\MenuBarResource;
-use App\Http\Resources\Cms\MenuCollection;
-use App\Traits\Cms\MenuBarTrait;
+use App\Http\Resources\Cms\FaqResource;
+use App\Http\Resources\Cms\FaqsCollection;
+use App\Traits\Cms\FaqsTrait;
 use Illuminate\Http\Request;
 
-class MenuBarApiController extends Controller
+class FaqApiController extends Controller
 {
-    use  MenuBarTrait;
+    use  FaqsTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class MenuBarApiController extends Controller
     public function index()
     {
         try {
-            $menus = $this->getAllMenus();
-            $menusCollection = new MenuCollection($menus);
+            $faqs = $this->getAllFaq();
+            $faqsCollection = new FaqsCollection($faqs);
             return response()->json(
-                $menusCollection, 200
+                $faqsCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -53,7 +53,7 @@ class MenuBarApiController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -65,9 +65,9 @@ class MenuBarApiController extends Controller
     public function show($id)
     {
         try {
-            $menu = new MenuBarResource($this->showMenu($id));
+            $faqs = new FaqResource($this->showfaq($id));
             return response()->json(
-                $menu, 200
+                $faqs, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
