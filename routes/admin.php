@@ -125,6 +125,10 @@ Route::get('/contact-us/{id}/delete/', [ContactUsController::class, 'destroy'])-
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
 Route::get('/tasks/create/', [TaskController::class, 'create'])->name('admin.tasks.create');
+Route::post('/tasks/store/', [TaskController::class, 'store'])->name('admin.tasks.store');
+Route::get('/tasks/{id}/edit/', [TaskController::class, 'edit'])->name('admin.tasks.edit');
+Route::post('/tasks/{id}/update/', [TaskController::class, 'update'])->name('admin.tasks.update');
+Route::get('/tasks/{id}/delete/', [TaskController::class, 'destroy'])->name('admin.tasks.delete');
 
 
 

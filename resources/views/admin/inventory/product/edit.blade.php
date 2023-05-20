@@ -70,7 +70,8 @@
                                     <select name="category_id" id="category_id" class="form-control">
                                         <option value="">-Select One-</option>
                                         @foreach ($categories as $category)
-                                            <option {{ ($category->id == $products->category_id) ? "selected":""  }} value="{{ $category->id }}">{{ $category->category_name }}
+                                            <option {{ ($category->id == $products->category_id)? "selected":""  }} 
+                                                value="{{ $category->id }}">{{ $category->category_name }}
                                             </option>
                                         @endforeach
                                     </select>
