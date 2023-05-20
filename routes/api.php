@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\FooterLinksApiController;
 use App\Http\Controllers\Api\MenuBarApiController;
+use App\Http\Controllers\Api\SliderApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('menus', MenuBarApiController::class);
+Route::resource('sliders', SliderApiController::class);
+Route::resource('footer-links', FooterLinksApiController::class);
