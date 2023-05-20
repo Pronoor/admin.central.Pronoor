@@ -15,7 +15,14 @@ class SliderCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'description' => $item->description,
+                    'slider_img' => asset('uploads/sliders/' . $item->slider_photos),
+                ];
+            }),
         ];
     }
 }
