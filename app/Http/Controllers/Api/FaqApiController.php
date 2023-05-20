@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Cms\FaqResource;
 use App\Http\Resources\Cms\FaqsCollection;
-use App\Http\Resources\Cms\SliderCollection;
-use App\Http\Resources\Cms\SliderResource;
 use App\Traits\Cms\FaqsTrait;
-use App\Traits\Cms\SliderTrait;
 use Illuminate\Http\Request;
 
 class FaqApiController extends Controller

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\TermsConditionCollection;
-use App\Http\Resources\Cms\TermsConditionResource;
-use App\Traits\Cms\TermsConditionTrait;
+use App\Http\Resources\Cms\PrivacyPolicyCollection;
+use App\Http\Resources\Cms\PrivacyPolicyResource;
+use App\Traits\Cms\PrivacyPolicyTrait;
 use Illuminate\Http\Request;
 
-class TermsConditionApiController extends Controller
+class PrivacyPolicyApiController extends Controller
 {
-    use  TermsConditionTrait;
+    use  PrivacyPolicyTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class TermsConditionApiController extends Controller
     public function index()
     {
         try {
-            $terms = $this->getAllTerms();
-            $termsconditionCollection = new TermsConditionCollection($terms);
+            $privacies = $this->getAllPrivacy();
+            $privacyPolicyCollection = new PrivacyPolicyCollection($privacies);
             return response()->json(
-                $termsconditionCollection, 200
+                $privacyPolicyCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -65,9 +65,9 @@ class TermsConditionApiController extends Controller
     public function show($id)
     {
         try {
-            $terms = new TermsConditionResource($this->showTerms($id));
+            $privacies = new PrivacyPolicyResource($this->showPrivacy($id));
             return response()->json(
-                $terms, 200
+                $privacies, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
