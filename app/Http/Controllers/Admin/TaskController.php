@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -90,17 +89,24 @@ class TaskController extends Controller
      */
     public function update(StoreTaskRequest $request, $id)
     {
-        
+
         try {
             // dd($request);
             $task =Task::find($id);
-            $task->update([
-                'name' => $request->name,
-                'description' => $request->description,
-                'status' => $request->status,
-                'assignee' => $request->assignee,
-                'deadline' => $request->deadline,
-            ]);
+            $task->name = $request->name;
+            $task->description = $request->description;
+            $task->status = $request->status;
+            $task->assignee = $request->assignee;
+            $task->deadline = $request->deadline;
+            $task->save();
+//            $task->update([
+//                'name' => $request->name,
+//                'description' => $request->description,
+//                'status' => $request->status,
+//                'assignee' => $request->assignee,
+//                'deadline' => $request->deadline,
+//            ]);
+
             return redirect()->action([TaskController::class, 'index'])->with('status', 'Task Update Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([TaskController::class, 'index'])->with('status', 'Something Went Wrong!');;

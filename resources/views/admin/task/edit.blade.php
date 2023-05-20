@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label for="name">Task Name</label>
                                 <input type="text" name="name" id="name" class="form-control"
-                                    placeholder="Enter name" value="{{ $tasks->name }}">
+                                       placeholder="Enter name" value="{{ $tasks->name }}">
                             </div>
                             <div class="form-group">
                                 <label for="description">Task Description</label>
@@ -79,30 +79,14 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select id="status" name="status" class="form-control">
-                                    @if ($tasks->status == 'To Do')
-                                        <option value="To Do">To Do</option>
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="Canceled">Canceled</option>
-                                        <option value="Success">Success</option>
-                                    @endif
-                                    @if ($tasks->status == 'On Hold')
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="To Do">To Do</option>
-                                        <option value="Canceled">Canceled</option>
-                                        <option value="Success">Success</option>
-                                    @endif
-                                    @if ($tasks->status == 'Canceled')
-                                        <option value="Canceled">Canceled</option>
-                                        <option value="To Do">To Do</option>
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="Success">Success</option>
-                                    @endif
-                                    @if ($tasks->status == 'Success')
-                                        <option value="Success">Success</option>
-                                        <option value="To Do">To Do</option>
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="Canceled">Canceled</option>
-                                    @endif
+                                    <option {{($tasks->status=="To Do")?" selected=selected ":""}} value="To Do">To Do</option>
+                                    <option {{($tasks->status=="On Hold")?" selected=selected ":""}} value="On Hold">On Hold
+                                    </option>
+                                    <option {{($tasks->status=="Canceled")?" selected=selected " :""}} value="Canceled">Canceled
+                                    </option>
+                                    <option {{($tasks->status=="Success")?" selected=selected ":""}} value="Success">Success
+                                    </option>
+
                                 </select>
                             </div>
                         </div>
@@ -126,14 +110,14 @@
                                 <select id="assignee" name="assignee" class="form-control">
                                     @foreach ($users as $user)
                                         <option {{ ($user->id == $tasks->assignee) ? "selected":"" }}
-                                            value="{{ $user->id }}">{{ $user->name }}</option>
+                                                value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="deadline">Deadline</label>
                                 <input type="date" name="deadline" id="deadline" class="form-control"
-                                    value="{{ $tasks->deadline }}">
+                                       value="{{ $tasks->deadline }}">
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -160,7 +144,7 @@
         $('#description').summernote({
             'height': '200px'
         })
-        $(function() {
+        $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {
             //         $('#quickForm').submit();
@@ -202,14 +186,14 @@
                     },
                 },
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });
