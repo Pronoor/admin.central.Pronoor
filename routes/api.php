@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Api\AboutUsApiController;
 use App\Http\Controllers\Api\FooterLinksApiController;
 use App\Http\Controllers\Api\MenuBarApiController;
+use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\SliderApiController;
 use App\Http\Controllers\Api\TestimonialsApiController;
 use Illuminate\Http\Request;
@@ -29,3 +29,4 @@ Route::resource('sliders', SliderApiController::class);
 Route::resource('footer-links', FooterLinksApiController::class);
 Route::resource('about-us', AboutUsApiController::class);
 Route::resource('testimonilas', TestimonialsApiController::class);
+Route::resource('services', ServiceApiController::class);

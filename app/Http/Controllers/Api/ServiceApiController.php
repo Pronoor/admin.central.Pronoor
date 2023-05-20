@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\AboutUsCollection;
-use App\Http\Resources\Cms\AboutusResource;
-use App\Traits\Cms\AbourUsTrait;
+use App\Http\Resources\Cms\ServiceCollection;
+use App\Http\Resources\Cms\ServiceResource;
+use App\Traits\Cms\ServiceTrait;
 use Illuminate\Http\Request;
 
-class AboutUsApiController extends Controller
+class ServiceApiController extends Controller
 {
-    use  AbourUsTrait;
+    use  ServiceTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class AboutUsApiController extends Controller
     public function index()
     {
         try {
-            $abouts = $this->getAllAbouts();
-            $aboutUsCollection = new AboutUsCollection($abouts);
+            $service = $this->getAllService();
+            $serviceCollection = new ServiceCollection($service);
             return response()->json(
-                $aboutUsCollection, 200
+                $serviceCollection, 200
             );
         } catch (\Exception $exception) {
             return response()->json(
@@ -65,9 +65,9 @@ class AboutUsApiController extends Controller
     public function show($id)
     {
         try {
-            $abouts= new AboutusResource($this->showAbouts($id));
+            $services = new ServiceResource($this->showService($id));
             return response()->json(
-                $abouts, 200
+                $services, 200
             );
         } catch (\Exception $exception) {
             return response()->json(

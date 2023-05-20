@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Cms\MenuBarResource;
 use App\Http\Resources\Cms\MenuCollection;
-use App\Models\MenuBar;
 use App\Traits\Cms\MenuBarTrait;
 use Illuminate\Http\Request;
 

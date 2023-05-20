@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cms\AboutUsCollection;
 use App\Http\Resources\Cms\TestimonialsCollection;
 use App\Http\Resources\Cms\TestimonilasResource;
 use App\Traits\Cms\TestimonialsTrait;
