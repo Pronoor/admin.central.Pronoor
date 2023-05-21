@@ -29,7 +29,7 @@ class StoreServiceRequest extends FormRequest
                 'required', 'min:5'
             ],
             'description' => [
-                'required', 'min:5'
+                'required', 'min:5,max:200'
             ],
             'icon' => [
                 'required', 'min:5'

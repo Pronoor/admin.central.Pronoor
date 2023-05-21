@@ -45,6 +45,7 @@ class ServiceController extends Controller
             Service::create($request->getMenuBarPayload());
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service Added Successfully!');;
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
     }
