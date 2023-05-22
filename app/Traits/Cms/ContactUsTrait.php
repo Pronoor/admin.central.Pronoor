@@ -31,6 +31,7 @@ trait ContactUsTrait
             return response()->json(['error' => 'Conatacts not found'], 404);
         }
     }
+  
 
     public function destroyContact($contactId)
     {

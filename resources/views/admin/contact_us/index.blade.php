@@ -33,9 +33,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.contact-us.create') }}" class="btn btn-sm btn-primary">Add New Contact Us</a>
-                    </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         @if (session('status'))
