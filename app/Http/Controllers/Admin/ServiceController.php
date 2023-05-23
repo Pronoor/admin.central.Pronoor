@@ -57,6 +57,7 @@ class ServiceController extends Controller
             }
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service Added Successfully!');;
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
     }

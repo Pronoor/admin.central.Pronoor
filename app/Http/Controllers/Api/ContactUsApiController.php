@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Cms\ContactUsCollection;
 use App\Http\Resources\Cms\ContactUsResource;
-use App\Http\Resources\Cms\TestimonialsCollection;
-use App\Http\Resources\Cms\TestimonilasResource;
+use App\Models\ContactUs;
 use App\Traits\Cms\ContactUsTrait;
-use App\Traits\Cms\TestimonialsTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreContactUsRequest;
+use App\Http\Requests\StoreContactUsRequests;
 
 class ContactUsApiController extends Controller
 {
-    use  ContactUsTrait;
+    use ContactUsTrait;
 
     /**
      * Display a listing of the resource.
@@ -54,9 +55,28 @@ class ContactUsApiController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreContactUsRequests $request)
     {
-        //
+        try{
+            $contactUs = ContactUs::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'replayed' => "0",
+                'message_body' => $request->message_body,
+            ]);
+            if($contactUs){
+                return response()->json([
+                    'status' => 200,
+                    'message' => "Your Message has been sent Successfully!",
+                ],200);
+            } 
+        }catch(\Exception $exception){
+            return response()->json([
+                'status' => 500,
+                    'message' => "Something Went Wrong!",
+                ],500);
+        }
     }
 
     /**

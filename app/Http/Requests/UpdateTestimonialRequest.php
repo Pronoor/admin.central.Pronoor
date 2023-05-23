@@ -26,13 +26,13 @@ class UpdateTestimonialRequest extends FormRequest
     {
         return [
             'quote' => [
-                'required',
+                'required','min:5','max:250'
             ],
             'quotes_given_by' => [
-                'required',
+                'required','min:5','max:200'
             ],
             'quotes_given_by_profession' => [
-                'required',
+                'required','min:5','max:200'
             ],
         ];
     }

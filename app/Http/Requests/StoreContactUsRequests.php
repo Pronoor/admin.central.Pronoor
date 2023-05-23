@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreServiceRequest extends FormRequest
+class StoreContactUsRequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -25,20 +24,18 @@ class StoreServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
-                'required', 'min:5'
+            'first_name' => [
+                'required',
             ],
-            'description' => [
-                'required', 'min:5,max:200'
+            'last_name' => [
+                'required',
             ],
-            'service_photos' => [
+            'email' => [
+                'required', 'email'
+            ],
+            'message_body' => [
                 'required',
             ],
         ];
-    }
-    public function getMenuBarPayload()
-    {
-        return collect($this->validated())
-            ->toArray();
     }
 }
