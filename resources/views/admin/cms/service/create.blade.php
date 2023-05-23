@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{ route('admin.service.store') }}" id="quickForm">
+                        <form method="post" action="{{ route('admin.service.store') }}" id="quickForm" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -63,10 +63,17 @@
                                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="icon">Icon</label>
-                                    <input type="text" class="form-control" name="icon" id="icon" value="{{ old('icon') }}">
+                                    <label for="exampleInputFile">Photo</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="service_photos" id="service_photos" class="custom-file-input">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
@@ -104,7 +111,7 @@
                     description: {
                         required: true,
                     },
-                    icon: {
+                    service_photos: {
                         required: true
                     },
                 },
@@ -115,8 +122,8 @@
                     description: {
                         required: "Please enter a description",
                     },
-                    icon: {
-                        required: "Please enter a icon",
+                    service_photos: {
+                        required: "Please enter a photo",
                     },
                 },
                 errorElement: 'span',

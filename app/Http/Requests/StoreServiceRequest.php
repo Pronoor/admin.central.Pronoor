@@ -31,8 +31,8 @@ class StoreServiceRequest extends FormRequest
             'description' => [
                 'required', 'min:5,max:200'
             ],
-            'icon' => [
-                'required', 'min:5'
+            'service_photos' => [
+                'required',
             ],
         ];
     }

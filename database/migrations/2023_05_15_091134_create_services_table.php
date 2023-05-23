@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('description', 200);
-            $table->string('icon', 250);
+            $table->string('service_photos')->default('default.png');
             $table->timestamps();
         });
     }
