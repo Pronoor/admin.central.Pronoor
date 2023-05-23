@@ -31,8 +31,8 @@ class UpdateServiceRequest extends FormRequest
             'description' => [
                 'required', 'min:5'
             ],
-            'icon' => [ 
-                'required', 'min:5'
+            'service_photos' => [ 
+                'required',
             ],
         ];
     }

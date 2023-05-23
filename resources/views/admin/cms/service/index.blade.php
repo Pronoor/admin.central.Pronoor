@@ -61,7 +61,11 @@
                                     <tr>
                                         <td>{{ $service->title }}</td>
                                         <td>{{ $service->description }}</td>
-                                        <td>{{ $service->icon }}</td>
+                                        <td>
+                                            <img style="width: 60px"
+                                                src="{{ asset('uploads/service_photos/'.$service->service_photos) }}"
+                                                alt="not found">
+                                        </td>
                                         <td>
                                             <a type="button" href="{{ route('admin.service.edit', $service->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>

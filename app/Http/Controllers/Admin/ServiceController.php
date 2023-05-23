@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ServiceController extends Controller
 {
@@ -42,7 +42,19 @@ class ServiceController extends Controller
     public function store(StoreServiceRequest $request)
     {
         try {
-            Service::create($request->getMenuBarPayload());
+            $service_id = Service::insertGetId($request->getMenuBarPayload());
+            if ($request->hasFile('service_photos')) {
+                $uploaded_photo = $request->file('service_photos');
+                $new_upload_name ="service_image_". $service_id . "." . $uploaded_photo->getClientOriginalExtension();
+                $new_upload_location = 'public/uploads/service_photos/' . $new_upload_name;
+                Image::make($uploaded_photo)->save(base_path($new_upload_location), 50);
+                // $service = Service::where('id',$service_id)->first();
+                // $service->service_photos =$new_upload_name;
+                // $service->save();
+                Service::whereId($service_id)->update([
+                    'service_photos' => $new_upload_name,
+                ]);
+            }
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service Added Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
@@ -86,6 +98,18 @@ class ServiceController extends Controller
         try {
             $service = Service::find($id);
             $service->update($request->getMenuBarPayload());
+            if ($request->hasFile('service_photos')) {
+                $uploaded_photo = $request->file('service_photos');
+                $new_upload_name ="service_image_". $id . "." . $uploaded_photo->getClientOriginalExtension();
+                $new_upload_location = 'public/uploads/service_photos/' . $new_upload_name;
+                Image::make($uploaded_photo)->save(base_path($new_upload_location), 50);
+                // $service = Service::where('id',$service_id)->first();
+                // $service->service_photos =$new_upload_name;
+                // $service->save();
+                Service::whereId($id)->update([
+                    'service_photos' => $new_upload_name,
+                ]);
+            }
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Service  update Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([ServiceController::class, 'index'])->with('status', 'Something Went Wrong!');;
