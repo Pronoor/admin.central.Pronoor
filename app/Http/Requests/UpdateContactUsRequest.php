@@ -26,19 +26,19 @@ class UpdateContactUsRequest extends FormRequest
     {
         return [
             'first_name' => [
-                'required', 'min:5'
+                'required', 'min:5', 'max:255'
             ],
             'last_name' => [
-                'required', 'min:5'
+                'required', 'min:5','max:255'
             ],
             'email' => [
-                'required',
+                'required', 'email'
             ],
             'replayed' => [
                 'required',
             ],
             'message_body' => [
-                'required',
+                'required', 'min:15','max:1500'
             ],
         ];
     }

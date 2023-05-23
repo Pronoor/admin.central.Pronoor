@@ -26,7 +26,7 @@ class UpdateMenuBarRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
+                'required', 'min:5','max:200'
             ],
             'url' => [
                 'required',
@@ -35,7 +35,7 @@ class UpdateMenuBarRequest extends FormRequest
                 'required', 'integer', 'max:12', 'min:1'
             ],
             'content' => [
-                'required',
+                'required','min:15','max:1500'
             ],
         ];
     }

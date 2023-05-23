@@ -26,13 +26,13 @@ class StoreFooterLinksRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
+                'required','min:5','max:100'
             ],
             'url' => [
                 'required', 'unique:footer_links', 'max:50',
             ],
             'content' => [
-                'required', 'max:15000', 'min:100'
+                'required', 'min:50', 'max:1500'
             ],
         ];
     }

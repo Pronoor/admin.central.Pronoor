@@ -115,7 +115,7 @@
                     url: {
                         required: true,
                     },
-                    order: {
+                    content: {
                         required: true
                     },
                 },
@@ -125,7 +125,7 @@
                     },
                     url: {
                         required: "Please enter a url",
-                    }, order: {
+                    }, content: {
                         required: "Please enter a order",
                     },
                 },
