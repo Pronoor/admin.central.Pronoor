@@ -15,7 +15,15 @@ class AboutUsCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'content' => $item->content,
+                    'created_at' => $item->created_at,
+                    'updated_at' => $item->updated_at
+                ];
+            }),
         ];
     }
 }
