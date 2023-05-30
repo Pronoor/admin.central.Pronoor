@@ -45,6 +45,7 @@ class TermsConditionController extends Controller
             TermsCondition::create($request->getMenuBarPayload());
             return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Terms And Condtion Added Successfully!');;
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->action([TermsConditionController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
     }

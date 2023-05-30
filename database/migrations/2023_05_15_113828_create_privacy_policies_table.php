@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('privacy_policies', function (Blueprint $table) {
             $table->id();
-            $table->string('title',100);
-            $table->string('description',200);
+            $table->string('title',200);
+            $table->text('description');
             $table->timestamps();
         });
     }
