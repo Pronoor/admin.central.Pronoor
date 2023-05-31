@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\AboutUs;
 use App\Models\Subscribe;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

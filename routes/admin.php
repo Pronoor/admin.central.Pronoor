@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TermsConditionController;
@@ -143,4 +144,11 @@ Route::get('/address/', [AddressController::class, 'index'])->name('admin.addres
 Route::get('/address/create/', [AddressController::class, 'create'])->name('admin.address.create');
 Route::post('/address/store/', [AddressController::class, 'store'])->name('admin.address.store');
 Route::post('/address/{id?}/update/', [AddressController::class, 'update'])->name('admin.address.update');
+
+Route::get('/social-media/', [SocialMediaController::class, 'index'])->name('admin.social-media');
+Route::get('/social-media/create/', [SocialMediaController::class, 'create'])->name('admin.social-media.create');
+Route::post('/social-media/store/', [SocialMediaController::class, 'store'])->name('admin.social-media.store');
+Route::get('/social-media/{id}/edit/', [SocialMediaController::class, 'edit'])->name('admin.social-media.edit');
+Route::post('/social-media/{id}/update/', [SocialMediaController::class, 'update'])->name('admin.social-media.update');
+Route::get('/social-media/{id}/delete/', [SocialMediaController::class, 'destroy'])->name('admin.social-media.delete');
 

@@ -467,7 +467,11 @@ return [
                 [
                     'text' => 'Privacy Policy',
                     'url' => 'admin/privacy-policies/',
-                ]
+                ],
+                [
+                    'text' => 'Social Media Links',
+                    'url' => 'admin/social-media/',
+                ],
 
             ],
         ],
