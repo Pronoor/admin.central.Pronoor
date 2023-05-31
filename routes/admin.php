@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\ContactUsController;
@@ -137,4 +138,9 @@ Route::post('/subscribe/store/', [SubscribeController::class, 'store'])->name('a
 Route::get('/subscribe/{id}/edit/', [SubscribeController::class, 'edit'])->name('admin.subscribe.edit');
 Route::post('/subscribe/{id}/update/', [SubscribeController::class, 'update'])->name('admin.subscribe.update');
 Route::get('/subscribe/{id}/delete/', [SubscribeController::class, 'destroy'])->name('admin.subscribe.delete');
+
+Route::get('/address/', [AddressController::class, 'index'])->name('admin.address');
+Route::get('/address/create/', [AddressController::class, 'create'])->name('admin.address.create');
+Route::post('/address/store/', [AddressController::class, 'store'])->name('admin.address.store');
+Route::post('/address/{id?}/update/', [AddressController::class, 'update'])->name('admin.address.update');
 

@@ -329,6 +329,11 @@ return [
             'url' => 'admin/password/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        [
+            'text' => 'Address',
+            'url' => 'admin/address',
+            'icon' => 'fa fa-address-card',
+        ],
         /* [
              'text'    => 'multilevel',
              'icon'    => 'fas fa-fw fa-share',

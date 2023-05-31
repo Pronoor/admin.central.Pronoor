@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AboutUsApiController;
+use App\Http\Controllers\Api\AddressApiController;
 use App\Http\Controllers\Api\ContactUsApiController;
 use App\Http\Controllers\Api\FaqApiController;
 use App\Http\Controllers\Api\FooterLinksApiController;
@@ -40,4 +41,5 @@ Route::resource('terms-condition', TermsConditionApiController::class);
 Route::resource('privacy-policy', PrivacyPolicyApiController::class);
 Route::resource('contact-us', ContactUsApiController::class);
 Route::resource('subscribe', SubscribeApiController::class);
+Route::resource('address', AddressApiController::class);
 
