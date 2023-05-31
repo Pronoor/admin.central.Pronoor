@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MenuBarApiController;
 use App\Http\Controllers\Api\PrivacyPolicyApiController;
 use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\SliderApiController;
+use App\Http\Controllers\Api\SubscribeApiController;
 use App\Http\Controllers\Api\TermsConditionApiController;
 use App\Http\Controllers\Api\TestimonialsApiController;
 use Illuminate\Http\Request;
@@ -38,3 +39,5 @@ Route::resource('faqs', FaqApiController::class);
 Route::resource('terms-condition', TermsConditionApiController::class);
 Route::resource('privacy-policy', PrivacyPolicyApiController::class);
 Route::resource('contact-us', ContactUsApiController::class);
+Route::resource('subscribe', SubscribeApiController::class);
+

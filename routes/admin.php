@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -130,5 +131,10 @@ Route::get('/tasks/{id}/edit/', [TaskController::class, 'edit'])->name('admin.ta
 Route::post('/tasks/{id}/update/', [TaskController::class, 'update'])->name('admin.tasks.update');
 Route::get('/tasks/{id}/delete/', [TaskController::class, 'destroy'])->name('admin.tasks.delete');
 
-
+Route::get('/subscribe/', [SubscribeController::class, 'index'])->name('admin.subscribe');
+Route::get('/subscribe/create/', [SubscribeController::class, 'create'])->name('admin.subscribe.create');
+Route::post('/subscribe/store/', [SubscribeController::class, 'store'])->name('admin.subscribe.store');
+Route::get('/subscribe/{id}/edit/', [SubscribeController::class, 'edit'])->name('admin.subscribe.edit');
+Route::post('/subscribe/{id}/update/', [SubscribeController::class, 'update'])->name('admin.subscribe.update');
+Route::get('/subscribe/{id}/delete/', [SubscribeController::class, 'destroy'])->name('admin.subscribe.delete');
 

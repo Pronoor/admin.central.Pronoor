@@ -471,6 +471,11 @@ return [
             'url' => 'admin/contact-us',
             'icon' => 'fas fa-fw fa fa-envelope',
         ],
+        [
+            'text' => 'Subscribe',
+            'url' => 'admin/subscribe',
+            'icon' => 'fa fa-adjust',
+        ],
     ],
 
     /*
