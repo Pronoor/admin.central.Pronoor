@@ -35,7 +35,7 @@ class StoreSocialMediaLinkRequest extends FormRequest
                 'required', 'min:2', 'max:200'
             ],
             'url' => [
-                'required', 'min:5', 'max:200','unique:social_media_links'
+                'required', 'min:5', 'max:200',
             ],
         ];
     }
