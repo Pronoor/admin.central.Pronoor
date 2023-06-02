@@ -329,6 +329,11 @@ return [
             'url' => 'admin/password/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        [
+            'text' => 'Address',
+            'url' => 'admin/address',
+            'icon' => 'fa fa-address-card',
+        ],
         /* [
              'text'    => 'multilevel',
              'icon'    => 'fas fa-fw fa-share',
@@ -462,7 +467,11 @@ return [
                 [
                     'text' => 'Privacy Policy',
                     'url' => 'admin/privacy-policies/',
-                ]
+                ],
+                [
+                    'text' => 'Social Media Links',
+                    'url' => 'admin/social-media/',
+                ],
 
             ],
         ],
@@ -470,6 +479,11 @@ return [
             'text' => 'Contact Us',
             'url' => 'admin/contact-us',
             'icon' => 'fas fa-fw fa fa-envelope',
+        ],
+        [
+            'text' => 'Subscribe',
+            'url' => 'admin/subscribe',
+            'icon' => 'fa fa-adjust',
         ],
     ],
 

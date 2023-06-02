@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -27,7 +26,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => [
-                'required', 'min:5'
+                'required', 'min:5','max:50'
             ],
             'user_type' => [
                 'required',
@@ -36,7 +35,7 @@ class UpdateUserRequest extends FormRequest
                 'required',
             ],
             'description' => [
-                'required',
+                'required','min:15','max:255'
             ],
         ];
     }

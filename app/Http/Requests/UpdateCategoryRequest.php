@@ -26,13 +26,13 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'category_name' => [
-                'required', 'min:5'
+                'required', 'min:5', 'max:255'
             ],
             'status' => [
                 'required',
             ],
             'description' => [
-                'required',
+                'required','min:15', 'max:1500'
             ],
         ];
     }

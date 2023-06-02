@@ -25,16 +25,16 @@ class StoreContactUsRequests extends FormRequest
     {
         return [
             'first_name' => [
-                'required',
+                'required', 'min:5', 'max:255'
             ],
             'last_name' => [
-                'required',
+                'required','min:5', 'max:255'
             ],
             'email' => [
                 'required', 'email'
             ],
             'message_body' => [
-                'required',
+                'required','min:15', 'max:1500'
             ],
         ];
     }

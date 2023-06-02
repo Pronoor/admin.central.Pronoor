@@ -28,14 +28,14 @@ class UpdateFooterLinksRequest extends FormRequest
         $id = $this->route('id');
         return [
             'title' => [
-                'required',
+                'required','min:5','max:100'
             ],
             'url' => [
                 'required',
                 Rule::unique('footer_links')->ignore($id),
             ],
             'content' => [
-                'required', 'max:15000', 'min:100'
+                'required', 'min:50', 'max:1500'
             ],
         ];
     }

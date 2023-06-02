@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\ContactUsController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -130,5 +133,22 @@ Route::get('/tasks/{id}/edit/', [TaskController::class, 'edit'])->name('admin.ta
 Route::post('/tasks/{id}/update/', [TaskController::class, 'update'])->name('admin.tasks.update');
 Route::get('/tasks/{id}/delete/', [TaskController::class, 'destroy'])->name('admin.tasks.delete');
 
+Route::get('/subscribe/', [SubscribeController::class, 'index'])->name('admin.subscribe');
+Route::get('/subscribe/create/', [SubscribeController::class, 'create'])->name('admin.subscribe.create');
+Route::post('/subscribe/store/', [SubscribeController::class, 'store'])->name('admin.subscribe.store');
+Route::get('/subscribe/{id}/edit/', [SubscribeController::class, 'edit'])->name('admin.subscribe.edit');
+Route::post('/subscribe/{id}/update/', [SubscribeController::class, 'update'])->name('admin.subscribe.update');
+Route::get('/subscribe/{id}/delete/', [SubscribeController::class, 'destroy'])->name('admin.subscribe.delete');
 
+Route::get('/address/', [AddressController::class, 'index'])->name('admin.address');
+Route::get('/address/create/', [AddressController::class, 'create'])->name('admin.address.create');
+Route::post('/address/store/', [AddressController::class, 'store'])->name('admin.address.store');
+Route::post('/address/{id?}/update/', [AddressController::class, 'update'])->name('admin.address.update');
+
+Route::get('/social-media/', [SocialMediaController::class, 'index'])->name('admin.social-media');
+Route::get('/social-media/create/', [SocialMediaController::class, 'create'])->name('admin.social-media.create');
+Route::post('/social-media/store/', [SocialMediaController::class, 'store'])->name('admin.social-media.store');
+Route::get('/social-media/{id}/edit/', [SocialMediaController::class, 'edit'])->name('admin.social-media.edit');
+Route::post('/social-media/{id}/update/', [SocialMediaController::class, 'update'])->name('admin.social-media.update');
+Route::get('/social-media/{id}/delete/', [SocialMediaController::class, 'destroy'])->name('admin.social-media.delete');
 

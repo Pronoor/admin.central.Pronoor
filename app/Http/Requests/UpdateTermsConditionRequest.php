@@ -26,10 +26,10 @@ class UpdateTermsConditionRequest extends FormRequest
     {
         return [
             'title' => [
-                'required', 'min:5'
+                'required', 'min:5','max:100'
             ],
             'description' => [
-                'required', 'min:15'
+                'required', 'min:15', 'max:200'
             ],
         ];
     }

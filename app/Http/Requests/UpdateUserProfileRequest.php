@@ -26,13 +26,13 @@ class UpdateUserProfileRequest extends FormRequest
     {
         return [
             'name' => [
-                'required', 'min:5'
+                'required', 'min:5','max:200'
             ],
             'email' => [
-                'required',
+                'required','email'
             ],
             'profession' => [
-                'required',
+                'required','min:5','max:200'
             ],
         ];
     }

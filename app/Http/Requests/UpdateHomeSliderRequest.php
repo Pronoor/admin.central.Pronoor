@@ -26,10 +26,10 @@ class UpdateHomeSliderRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
+                'required','min:5','max:100'
             ],
             'description' => [
-                'required',
+                'required','min:15','max:200'
             ],
             'slider_photos' => [
                 'required','mimes:jpg',
