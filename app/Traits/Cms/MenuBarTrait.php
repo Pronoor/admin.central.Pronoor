@@ -9,7 +9,7 @@ trait MenuBarTrait
 {
     public function getAllMenus()
     {
-        return MenuBar::all();
+        return MenuBar::orderBy('order')->get();
     }
 
     public function showMenu($menuId)
