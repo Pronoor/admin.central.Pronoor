@@ -85,7 +85,7 @@
                                     <label for="description">Decription</label>
                                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter desciption">{{ old('description') }}</textarea>
                                 </div>
-                                
+
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -137,9 +137,9 @@
                     gender: {
                         required: true,
                     },
-                    description: {
-                        required: true,
-                    },
+                    // description: {
+                    //     required: true,
+                    // },
                 },
                 messages: {
                     name: {
@@ -157,9 +157,9 @@
                     gender: {
                         required: "Please enter a gender",
                     },
-                    description: {
-                        required: "Please enter a description",
-                    },
+                    // description: {
+                    //     required: "Please enter a description",
+                    // },
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {

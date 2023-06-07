@@ -17,7 +17,7 @@ class StoreUserRequest extends FormRequest
     {
         return Auth::check();
     }
-    
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -43,7 +43,7 @@ class StoreUserRequest extends FormRequest
                 'required',
             ],
             'description' => [
-                'required','min:15','max:255'
+                'max:255'
             ],
         ];
     }
