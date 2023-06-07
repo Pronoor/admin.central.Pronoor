@@ -56,24 +56,24 @@
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Photo</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="service_photos" id="service_photos" class="custom-file-input">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputFile">Photo</label>--}}
+{{--                                    <div class="input-group">--}}
+{{--                                        <div class="custom-file">--}}
+{{--                                            <input type="file" name="service_photos" id="service_photos" class="custom-file-input">--}}
+{{--                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-group-append">--}}
+{{--                                            <span class="input-group-text">Upload</span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             <!-- /.card-body -->
 
                             <div class="card-footer">
@@ -112,7 +112,7 @@
                         required: true,
                     },
                     service_photos: {
-                        required: true
+                        required: false
                     },
                 },
                 messages: {

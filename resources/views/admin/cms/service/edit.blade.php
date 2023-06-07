@@ -119,7 +119,7 @@
                         required: true,
                     },
                     service_photos: {
-                        required: true
+                        required: false
                     },
                 },
                 messages: {

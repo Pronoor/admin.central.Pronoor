@@ -39,43 +39,64 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         @if(count($errors) > 0 )
-                        <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <ul class="p-0 m-0" style="list-style: none;">
-                                @foreach($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                        <form method="post" action="{{route('admin.home-sliders.update',$homeSliders->id)}}" id="quickForm" enctype="multipart/form-data">
+                            <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{route('admin.home-sliders.update',$homeSliders->id)}}"
+                              id="quickForm" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Title</label>
-                                    <input type="text" name="title" class="form-control" id="title"  placeholder="Enter title" value="{{ $homeSliders->title }}">
+                                    <input type="text" name="title" class="form-control" id="title"
+                                           placeholder="Enter title" value="{{ $homeSliders->title }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Descreption</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3">{{ $homeSliders->description }}</textarea>
+                                    <label for="exampleInputPassword1">Description</label>
+                                    <textarea class="form-control" name="description" id="description"
+                                              rows="3">{{ $homeSliders->description }}</textarea>
                                     {{-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> --}}
                                 </div>
                                 <div class="form-group">
-                                    <img style="width: 70px"
-                                                src="{{ asset('uploads/sliders/'.$homeSliders->slider_photos) }}"
-                                                alt="not found">
-                                    <label for="exampleInputFile">Photo</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="slider_photos" id="slider_photos" class="custom-file-input">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    <label for="exampleInputFile">Uploaded Photo</label>
+                                    <div class="col-4 right">
+                                        <img  class="img-fluid"
+                                              src="{{ asset('uploads/sliders/'.$homeSliders->slider_photos) }}"
+                                              alt="not found">
+                                    </div>
+
+                                    <br><br>
+                                    <label for="exampleInputFile">Upload Photo</label>
+                                    <div class="col-5">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="slider_photos" id="slider_photos" onchange="previewFile(this);"
+                                                       class="custom-file-input">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose
+                                                    file</label>
+                                            </div>
+                                            {{--                                        <div class="input-group-append">--}}
+                                            {{--                                            <span class="input-group-text">Upload</span>--}}
+                                            {{--                                        </div>--}}
                                         </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+
+                                    </div>
+
+                                    <br><br>
+                                    <div class="col-4 right">
+                                        <div class="input-group">
+                                            <img class="img-fluid" id="previewImg" {{ asset('uploads/sliders/'.$homeSliders->slider_photos) }} alt="">
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -101,6 +122,21 @@
 
 @section('js')
     <script>
+
+        function previewFile(input) {
+            var file = $("input[type=file]").get(0).files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    $("#previewImg").attr("src", reader.result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        }
+
         $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {

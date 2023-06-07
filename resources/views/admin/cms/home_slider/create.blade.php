@@ -39,37 +39,51 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         @if(count($errors) > 0 )
-                        <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <ul class="p-0 m-0" style="list-style: none;">
-                                @foreach($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                        <form method="post" action="{{route('admin.home-sliders.store')}}" id="quickForm" enctype="multipart/form-data">
+                            <div class="alert alert-default-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{route('admin.home-sliders.store')}}" id="quickForm"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Title</label>
-                                    <input type="text" name="title" class="form-control" id="title"  placeholder="Enter title" value="{{ old('title') }}">
+                                    <input type="text" name="title" class="form-control" id="title"
+                                           placeholder="Enter title" value="{{ old('title') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Descreption</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" name="description" id="description"
+                                              rows="3">{{ old('description') }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Photo</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="slider_photos" id="slider_photos" class="custom-file-input">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    <div class="col-5">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="slider_photos" id="slider_photos" onchange="previewFile(this);"
+                                                       class="custom-file-input">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose
+                                                    file</label>
+                                            </div>
+                                            <br>
+                                            {{--                                        <div class="input-group-append">--}}
+                                            {{--                                            <span class="input-group-text">Upload</span>--}}
+                                            {{--                                        </div>--}}
                                         </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                    </div>
+                                    <br><br>
+                                    <div class="col-4 right">
+                                        <div class="input-group">
+                                            <img class="img-fluid" id="previewImg" src="" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -97,6 +111,21 @@
 
 @section('js')
     <script>
+
+        function previewFile(input){
+            var file = $("input[type=file]").get(0).files[0];
+
+            if(file){
+                var reader = new FileReader();
+
+                reader.onload = function(){
+                    $("#previewImg").attr("src", reader.result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        }
+
         $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {

@@ -34,9 +34,9 @@ class UpdateUserRequest extends FormRequest
             'gender' => [
                 'required',
             ],
-            'description' => [
-                'required','min:15','max:255'
-            ],
+//            'description' => [
+//                'required','min:15','max:255'
+//            ],
         ];
     }
     public function getMenuBarPayload()

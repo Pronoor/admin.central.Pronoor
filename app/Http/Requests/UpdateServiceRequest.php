@@ -31,9 +31,9 @@ class UpdateServiceRequest extends FormRequest
             'description' => [
                 'required', 'min:5', 'max:200'
             ],
-            'service_photos' => [ 
-                'required',
-            ],
+//            'service_photos' => [
+//                'required',
+//            ],
         ];
     }
     public function getMenuBarPayload()

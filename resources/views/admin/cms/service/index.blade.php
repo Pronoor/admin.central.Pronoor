@@ -52,7 +52,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th>Icon</th>
+{{--                                    <th>Icon</th>--}}
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,11 +61,11 @@
                                     <tr>
                                         <td>{{ $service->title }}</td>
                                         <td>{{ $service->description }}</td>
-                                        <td>
-                                            <img style="width: 60px"
-                                                src="{{ asset('uploads/service_photos/'.$service->service_photos) }}"
-                                                alt="not found">
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            <img style="width: 60px"--}}
+{{--                                                src="{{ asset('uploads/service_photos/'.$service->service_photos) }}"--}}
+{{--                                                alt="not found">--}}
+{{--                                        </td>--}}
                                         <td>
                                             <a type="button" href="{{ route('admin.service.edit', $service->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
@@ -79,7 +79,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th>Icon</th>
+{{--                                    <th>Icon</th>--}}
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
