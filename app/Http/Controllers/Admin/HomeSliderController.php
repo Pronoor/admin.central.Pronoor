@@ -48,7 +48,7 @@ class HomeSliderController extends Controller
                 $uploaded_photo = $request->file('slider_photos');
                 $new_upload_name ="slider_image_". $home_slider_id . "." . $uploaded_photo->getClientOriginalExtension();
                 $new_upload_location = 'public/uploads/sliders/' . $new_upload_name;
-                Image::make($uploaded_photo)->save(base_path($new_upload_location), 50);
+                Image::make($uploaded_photo)->save(base_path($new_upload_location));
                 HomeSlider::find($home_slider_id)->update([
                     'slider_photos' => $new_upload_name,
                 ]);
@@ -99,7 +99,7 @@ class HomeSliderController extends Controller
                 $uploaded_photo = $request->file('slider_photos');
                 $new_upload_name ="slider_image_". $id . "." . $uploaded_photo->getClientOriginalExtension();
                 $new_upload_location = 'public/uploads/sliders/' . $new_upload_name;
-                Image::make($uploaded_photo)->resize(1080, 1900)->save(base_path($new_upload_location), 50);
+                Image::make($uploaded_photo)->save(base_path($new_upload_location));
                 HomeSlider::where('id',$id)->update([
                     'slider_photos' => $new_upload_name,
                 ]);

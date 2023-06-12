@@ -21,9 +21,9 @@ class AddressController extends Controller
         return view('admin.address.index',[
 
             'addresses' => Address::first(),
-            
+
         ]);
-        
+
     }
 
     /**
@@ -88,9 +88,12 @@ class AddressController extends Controller
     {
         try {
             $address = Address::find($id);
-            $address->update([
-                'address' => $request->address,
-            ]);
+            $address->address = $request->address;
+            $address->location = $request->location;
+            $address->email = $request->email;
+            $address->phone = $request->phone;
+            $address->save();
+
             return redirect()->action([AddressController::class, 'index'])->with('status', 'Address update Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([AddressController::class, 'index'])->with('status', 'Something Went Wrong!');;

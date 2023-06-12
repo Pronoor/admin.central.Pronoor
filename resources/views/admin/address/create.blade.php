@@ -83,6 +83,29 @@
                                             text</u> <strong>here</strong>
                                         </textarea>
                                     </div>
+                                    <hr>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label for="address">Contact Location</label>
+                                        <textarea id="location" name="location">
+                                             Place <em>some</em> <u>
+                                            text</u> <strong>here</strong>
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Contact Email</label>
+                                        <textarea id="email" name="email">
+                                             Place <em>some</em> <u>
+                                            text</u> <strong>here</strong>
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Contact Phone</label>
+                                        <textarea id="phone" name="phone">
+                                             Place <em>some</em> <u>
+                                            text</u> <strong>here</strong>
+                                        </textarea>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -121,7 +144,16 @@
     <script>
         $('#address').summernote({
             'height': '200px'
-        })
+        });
+        $('#location').summernote({
+            'height': '200px'
+        });
+        $('#email').summernote({
+            'height': '200px'
+        });
+        $('#phone').summernote({
+            'height': '200px'
+        });
         $(function() {
             // $.validator.setDefaults({
             //     submitHandler: function () {

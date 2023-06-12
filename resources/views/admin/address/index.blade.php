@@ -80,9 +80,28 @@
                                     id="quickForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="address">Address</label>
+                                        <label for="address">Address(Footer)</label>
                                         <textarea id="address" name="address">
                                             {{ @$addresses->address }}
+                                        </textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label for="address">Contact Location</label>
+                                        <textarea id="location" name="location">
+                                            {{ @$addresses->location }}
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Contact Email</label>
+                                        <textarea id="email" name="email">
+                                            {{ @$addresses->email }}
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Contact Phone</label>
+                                        <textarea id="phone" name="phone">
+                                            {{ @$addresses->phone }}
                                         </textarea>
                                     </div>
                                     <div class="form-group row">
@@ -122,7 +141,16 @@
     <script>
         $('#address').summernote({
             'height': '200px'
-        })
+        });
+        $('#location').summernote({
+            'height': '200px'
+        });
+        $('#email').summernote({
+            'height': '200px'
+        });
+        $('#phone').summernote({
+            'height': '200px'
+        });
         $(function() {
             // $.validator.setDefaults({
             //     submitHandler: function () {
