@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::table('addresses', function (Blueprint $table) {
             $table->text('location')->nullable()->after('address');
             $table->text('email')->nullable()->after('location');
-            $table->text('phone')->nullable()->after('phone');
+            $table->text('phone')->nullable()->after('email');
         });
     }
 
