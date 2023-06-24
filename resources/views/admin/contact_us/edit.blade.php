@@ -111,7 +111,7 @@
     <script>
         $('#message_body').summernote({
             'height': '250px'
-        })
+        });
         $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {

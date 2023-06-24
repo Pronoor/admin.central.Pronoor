@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreContactUsRequest;
 use App\Http\Requests\UpdateContactUsRequest;
+use App\Mail\PronoorEmail;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
@@ -17,8 +19,8 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        return view('admin.contact_us.index',[
-            'contactUses' => ContactUs::all() 
+        return view('admin.contact_us.index', [
+            'contactUses' => ContactUs::all()
         ]);
     }
 
@@ -35,7 +37,7 @@ class ContactUsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreContactUsRequest $request)
@@ -51,7 +53,7 @@ class ContactUsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,12 +64,12 @@ class ContactUsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('admin.contact_us.edit',[
+        return view('admin.contact_us.edit', [
             'contactUses' => ContactUs::find($id),
         ]);
     }
@@ -75,8 +77,8 @@ class ContactUsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateContactUsRequest $request, $id)
@@ -93,7 +95,7 @@ class ContactUsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -105,5 +107,28 @@ class ContactUsController extends Controller
         } catch (\Exception $exception) {
             return redirect()->action([ContactUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
         }
+    }
+
+
+    public function replay($id)
+    {
+        return view('admin.contact_us.replay', [
+            'contactUses' => ContactUs::find($id),
+        ]);
+    }
+
+    public function post_replay(Request $request, $id)
+    {
+        try {
+            $contactUs = ContactUs::find($id);
+            Mail::to($contactUs->email)->send(new PronoorEmail($contactUs->first_name, $contactUs->last_name, $request->replay_body));
+
+            $contactUs->replayed = 1;
+            $contactUs->save();
+            return redirect()->action([ContactUsController::class, 'index'])->with('status', 'Contact Us mail successfully sent!');;
+        } catch (\Exception $exception) {
+            return redirect()->action([ContactUsController::class, 'index'])->with('status', 'Something Went Wrong!');;
+        }
+
     }
 }

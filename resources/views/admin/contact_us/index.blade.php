@@ -71,6 +71,8 @@
                                         <td>
                                             <a type="button" href="{{ route('admin.contact-us.edit', $contactUs->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
+                                            <a type="button" href="{{ route('admin.contact-us.replay', $contactUs->id) }}"
+                                               class="btn btn-sm btn-outline-primary">Replay</a>
                                             <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.contact-us.delete', $contactUs->id) }}"
                                                 class="btn btn-sm btn-danger">Delete</a>
                                         </td>

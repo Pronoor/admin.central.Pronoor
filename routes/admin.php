@@ -124,6 +124,8 @@ Route::get('/contact-us/create/', [ContactUsController::class, 'create'])->name(
 Route::post('/contact-us/store/', [ContactUsController::class, 'store'])->name('admin.contact-us.store');
 Route::get('/contact-us/{id}/edit/', [ContactUsController::class, 'edit'])->name('admin.contact-us.edit');
 Route::post('/contact-us/{id}/update/', [ContactUsController::class, 'update'])->name('admin.contact-us.update');
+Route::get('/contact-us/{id}/replay/', [ContactUsController::class, 'replay'])->name('admin.contact-us.replay');
+Route::post('/contact-us/{id}/post_replay/', [ContactUsController::class, 'post_replay'])->name('admin.contact-us.post_replay');
 Route::get('/contact-us/{id}/delete/', [ContactUsController::class, 'destroy'])->name('admin.contact-us.delete');
 
 Route::get('/tasks/', [TaskController::class, 'index'])->name('admin.tasks');
