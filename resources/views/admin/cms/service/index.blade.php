@@ -34,7 +34,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <a type="button" href="{{ route('admin.service.create') }}" class="btn btn-sm btn-primary">Add New
+                        <a type="button" href="{{ route('admin.service.create') }}" class="btn btn-sm btn-primary">Add
+                            New
                             Service</a>
                     </div>
                     <!-- /.card-header -->
@@ -49,39 +50,50 @@
                         @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-{{--                                    <th>Icon</th>--}}
-                                    <th>Action</th>
-                                </tr>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Types</th>
+                                <th>Image</th>
+                                <th>Links</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach ($services as $service)
-                                    <tr>
-                                        <td>{{ $service->title }}</td>
-                                        <td>{{ $service->description }}</td>
-{{--                                        <td>--}}
-{{--                                            <img style="width: 60px"--}}
-{{--                                                src="{{ asset('uploads/service_photos/'.$service->service_photos) }}"--}}
-{{--                                                alt="not found">--}}
-{{--                                        </td>--}}
-                                        <td>
-                                            <a type="button" href="{{ route('admin.service.edit', $service->id) }}"
-                                                class="btn btn-sm btn-primary">Edit</a>
-                                            <a onclick="return confirm('Are you sure to delete')" type="button" href="{{ route('admin.service.delete', $service->id) }}"
-                                                class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach ($services as $service)
+                                <tr>
+                                    <td>{{ $service->title }}</td>
+                                    <td>{{ $service->description }}</td>
+                                    <td>{{ $service->types }}</td>
+                                    <td>
+                                        @if (!empty($service->image))
+                                            <img style="width: 60px"
+                                                 src="{{ asset('uploads/service_photos/'.$service->image) }}"
+                                                 alt="not found">
+                                        @else
+                                            No Image
+                                        @endif
+                                    </td>
+                                    <td>{{ $service->links }}</td>
+                                    <td>
+                                        <a type="button" href="{{ route('admin.service.edit', $service->id) }}"
+                                           class="btn btn-sm btn-primary">Edit</a>
+                                        <a onclick="return confirm('Are you sure to delete')" type="button"
+                                           href="{{ route('admin.service.delete', $service->id) }}"
+                                           class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-{{--                                    <th>Icon</th>--}}
-                                    <th>Action</th>
-                                </tr>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Types</th>
+                                <th>Image</th>
+                                <th>Links</th>
+                                <th>Action</th>
+                            </tr>
                             </tfoot>
                         </table>
                     </div>
@@ -109,7 +121,7 @@
 
 @section('js')
     <script>
-        $(function() {
+        $(function () {
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

@@ -20,7 +20,8 @@ class ServiceCollection extends ResourceCollection
                     'id' => $item->id,
                     'title' => $item->title,
                     'description' => $item->description,
-                    'service_photos' => asset('uploads/service_photos/' . $item->service_photos),
+                    'links' => $item->links,
+                    'image' => asset('uploads/service_photos/' . $item->image),
                 ];
             }),
         ];

@@ -50,35 +50,58 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{ route('admin.service.store') }}" id="quickForm" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.service.store') }}" id="quickForm"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                                    <input type="text" class="form-control" name="title" id="title"
+                                           value="{{ old('title') }}">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" name="description" id="description"
+                                              rows="3">{{ old('description') }}</textarea>
                                 </div>
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputFile">Photo</label>--}}
-{{--                                    <div class="input-group">--}}
-{{--                                        <div class="custom-file">--}}
-{{--                                            <input type="file" name="service_photos" id="service_photos" class="custom-file-input">--}}
-{{--                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-group-append">--}}
-{{--                                            <span class="input-group-text">Upload</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-                            <!-- /.card-body -->
+                                <div class="form-group">
+                                    <label for="types">Types</label>
+                                    <select class="form-control" name="types" id="types">
+                                        <option value="phone_sms">Phone and SMS</option>
+                                        <option value="faxes">Faxes</option>
+                                        <option value="directory">Directory</option>
+                                    </select>
+                                </div>
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                                <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input type="file" class="form-control" name="image" id="image">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="links">Links</label>
+                                    <input type="text" class="form-control" name="links" id="links"
+                                           value="{{ old('links') }}">
+                                </div>
+
+                                {{--                                <div class="form-group">--}}
+                                {{--                                    <label for="exampleInputFile">Photo</label>--}}
+                                {{--                                    <div class="input-group">--}}
+                                {{--                                        <div class="custom-file">--}}
+                                {{--                                            <input type="file" name="service_photos" id="service_photos" class="custom-file-input">--}}
+                                {{--                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>--}}
+                                {{--                                        </div>--}}
+                                {{--                                        <div class="input-group-append">--}}
+                                {{--                                            <span class="input-group-text">Upload</span>--}}
+                                {{--                                        </div>--}}
+                                {{--                                    </div>--}}
+                                {{--                                </div>--}}
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                         </form>
                     </div>
                     <!-- /.card-body -->
@@ -97,7 +120,7 @@
 
 @section('js')
     <script>
-        $(function() {
+        $(function () {
             // $.validator.setDefaults({
             //     submitHandler: function () {
             //         $('#quickForm').submit();
@@ -111,8 +134,14 @@
                     description: {
                         required: true,
                     },
-                    service_photos: {
-                        required: false
+                    types: {
+                        required: true,
+                    },
+                    image: {
+                        required: true,
+                    },
+                    links: {
+                        required: true,
                     },
                 },
                 messages: {
@@ -122,19 +151,25 @@
                     description: {
                         required: "Please enter a description",
                     },
-                    service_photos: {
-                        required: "Please enter a photo",
+                    types: {
+                        required: "Please select a type",
+                    },
+                    image: {
+                        required: "Please choose an image",
+                    },
+                    links: {
+                        required: "Please enter links",
                     },
                 },
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });

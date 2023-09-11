@@ -25,17 +25,13 @@ class UpdateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
-                'required', 'min:5','max:100'
-            ],
-            'description' => [
-                'required', 'min:5', 'max:200'
-            ],
-//            'service_photos' => [
-//                'required',
-//            ],
+            'title' => ['required', 'min:5', 'max:100'],
+            'description' => ['required', 'min:5', 'max:200'],
+            'types' => ['required', 'in:phone_sms,faxes,directory'], // Add validation for 'types'
+            'links' => ['nullable', 'url', 'max:255'], // Add validation for 'links' (assuming it's a URL)
         ];
     }
+
     public function getMenuBarPayload()
     {
         return collect($this->validated())
