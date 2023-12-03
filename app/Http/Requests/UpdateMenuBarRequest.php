@@ -26,7 +26,7 @@ class UpdateMenuBarRequest extends FormRequest
     {
         return [
             'title' => [
-                'required', 'min:5','max:200'
+                'required', 'min:3', 'max:25'
             ],
             'url' => [
                 'required',
@@ -35,10 +35,11 @@ class UpdateMenuBarRequest extends FormRequest
                 'required', 'integer', 'max:12', 'min:1'
             ],
             'content' => [
-                'required','min:15','max:1500'
+                'required', 'min:15', 'max:1500'
             ],
         ];
     }
+
     public function getMenuBarPayload()
     {
         $data = collect($this->validated())->toArray();

@@ -26,7 +26,7 @@ class StoreMenuBarRequest extends FormRequest
     {
         return [
             'title' => [
-                'required', 'min:5','max:200'
+                'required', 'min:3','max:25'
             ],
             'url' => [
                 'required'
