@@ -29,7 +29,7 @@ class StoreTermsConditionRequest extends FormRequest
                 'required', 'min:5','max:100'
             ],
             'description' => [
-                'required', 'min:15', 'max:200'
+                'required', 'min:15', 'max:1000'
             ],
         ];
     }

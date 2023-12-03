@@ -145,7 +145,7 @@ Route::get('/subscribe/{id}/delete/', [SubscribeController::class, 'destroy'])->
 Route::get('/address/', [AddressController::class, 'index'])->name('admin.address');
 Route::get('/address/create/', [AddressController::class, 'create'])->name('admin.address.create');
 Route::post('/address/store/', [AddressController::class, 'store'])->name('admin.address.store');
-Route::post('/address/{id?}/update/', [AddressController::class, 'update'])->name('admin.address.update');
+Route::post('/address/{id?}/update', [AddressController::class, 'update'])->name('admin.address.update');
 
 Route::get('/social-media/', [SocialMediaController::class, 'index'])->name('admin.social-media');
 Route::get('/social-media/create/', [SocialMediaController::class, 'create'])->name('admin.social-media.create');
