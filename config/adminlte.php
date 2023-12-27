@@ -472,6 +472,10 @@ return [
                     'text' => 'Social Media Links',
                     'url' => 'admin/social-media/',
                 ],
+                [
+                    'text' => 'Site Settings',
+                    'url' => 'admin/settings/',
+                ],
 
             ],
         ],
