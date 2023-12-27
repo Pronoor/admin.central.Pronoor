@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\TaskController;
@@ -154,3 +155,5 @@ Route::get('/social-media/{id}/edit/', [SocialMediaController::class, 'edit'])->
 Route::post('/social-media/{id}/update/', [SocialMediaController::class, 'update'])->name('admin.social-media.update');
 Route::get('/social-media/{id}/delete/', [SocialMediaController::class, 'destroy'])->name('admin.social-media.delete');
 
+Route::get('/settings/', [SettingsController::class, 'index'])->name('admin.settings');
+Route::post('/settings/{id}/update/', [SettingsController::class, 'update'])->name('admin.settings.update');
