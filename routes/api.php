@@ -46,4 +46,5 @@ Route::resource('subscribe', SubscribeApiController::class);
 Route::resource('address', AddressApiController::class);
 Route::resource('social-media', SocialMediaLinkApiController::class);
 Route::resource('settings', SettingsApiController::class);
+Route::resource('testimonials', TestimonialsApiController::class);
 

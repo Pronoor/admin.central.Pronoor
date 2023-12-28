@@ -34,6 +34,9 @@ class UpdateTestimonialRequest extends FormRequest
             'quotes_given_by_profession' => [
                 'required','min:5','max:200'
             ],
+            'image' => [
+                'image','mimes:jpeg,png,jpg,gif','max:500'
+            ],
         ];
     }
     public function getMenuBarPayload()

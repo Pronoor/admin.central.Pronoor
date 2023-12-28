@@ -9,5 +9,5 @@ class Testimonial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['quote','quotes_given_by','quotes_given_by_profession'];
+    protected $fillable = ['quote','quotes_given_by','quotes_given_by_profession', 'image'];
 }
