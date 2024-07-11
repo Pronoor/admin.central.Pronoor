@@ -46,7 +46,8 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Fisrt Name</th>
+                                    <th width="10%">Date</th>
+                                    <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Replayed</th>
@@ -57,6 +58,7 @@
                             <tbody>
                                 @foreach ($contactUses as $contactUs)
                                     <tr>
+                                        <td>{{  date('d-m-Y', strtotime($contactUs->created_at))}}</td>
                                         <td>{{ $contactUs->first_name }}</td>
                                         <td>{{ $contactUs->last_name }}</td>
                                         <td>{{ $contactUs->email }}</td>
@@ -81,7 +83,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Fisrt Name</th>
+                                    <th>Date</th>
+                                    <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Replayed</th>
