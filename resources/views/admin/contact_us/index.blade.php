@@ -58,7 +58,7 @@
                             <tbody>
                                 @foreach ($contactUses as $contactUs)
                                     <tr>
-                                        <td>{{  date('d-m-Y', strtotime($contactUs->created_at))}}</td>
+                                        <td>{{  date('m/d/Y', strtotime($contactUs->created_at))}}</td>
                                         <td>{{ $contactUs->first_name }}</td>
                                         <td>{{ $contactUs->last_name }}</td>
                                         <td>{{ $contactUs->email }}</td>
