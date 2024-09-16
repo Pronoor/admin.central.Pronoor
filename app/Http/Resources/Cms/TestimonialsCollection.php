@@ -14,8 +14,19 @@ class TestimonialsCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        $data = $this->collection;
         return [
-            'data' => $this->collection
+            'data' => $this->collection->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'quote' => $item->quote,
+                    'quotes_given_by' => $item->quotes_given_by,
+                    'quotes_given_by_profession' => $item->quotes_given_by_profession,
+                    'image' => (isset($item->image) && $item->image !== '') ? url( 'storage/' . $item->image) : '',
+                    'created_at' => $item->created_at,
+                    'updated_at' => $item->updated_at
+                ];
+            }),
         ];
     }
 }

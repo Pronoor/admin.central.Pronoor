@@ -9,7 +9,19 @@
 @endpush
 
 @section('css')
-
+<style>
+    /* Styles for the avatar */
+    .avatar {
+        width: 30px;
+        height: 30px;
+        background-color: #575757;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        border-radius: 50%;
+    }
+</style>
 @stop
 
 @section('content_header')
@@ -49,6 +61,7 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>Image </th>
                                     <th>Quote </th>
                                     <th>Quotes_given_by</th>
                                     <th>Quotes_given_by_profession</th>
@@ -58,8 +71,15 @@
                             <tbody>
                                 @foreach ($testimonials as $testimonial)
                                     <tr>
+                                        <td>
+                                            @if (isset($testimonial->image) != '' && $testimonial->image)
+                                                <img src="{{ url( 'storage/' . $testimonial->image) }}" class="rounded-circle" style="width: 30px;" />
+                                            @else
+                                                <div class="avatar"></div>
+                                            @endif
+                                        </td>
                                         <td>{{ $testimonial->quote }}</td>
-                                        <td>{{ $testimonial->quotes_given_by }}</td>
+                                        <td class="name-of-avatar">{{ $testimonial->quotes_given_by }}</td>
                                         <td>{{ $testimonial->quotes_given_by_profession }}</td>
                                         <td>
                                             <a type="button" href="{{ route('admin.testimonial.edit', $testimonial->id) }}"
@@ -71,12 +91,7 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <th>Quote </th>
-                                    <th>Quotes_given_by</th>
-                                    <th>Quotes_given_by_profession</th>
-                                    <th>Action</th>
-                                </tr>
+                               
                             </tfoot>
                         </table>
                     </div>
@@ -114,6 +129,14 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
+            $('.name-of-avatar').each(function(){
+                var text = $(this).text();
+                var initials = text.match(/\b\w/g) || [];
+                initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
+                console.log(initials)
+                $(this).siblings().eq(0).find('.avatar').text(initials);
+            })
         });
     </script>
 @stop

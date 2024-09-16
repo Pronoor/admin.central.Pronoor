@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{ route('admin.testimonial.update',$testimonials->id) }}" id="quickForm">
+                        <form method="post" action="{{ route('admin.testimonial.update',$testimonials->id) }}" id="quickForm" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -67,6 +67,24 @@
                                     <input type="text" class="form-control" name="quotes_given_by_profession"
                                         id="quotes_given_by_profession" value="{{ $testimonials->quotes_given_by_profession }}">
                                 </div>
+
+                                <div class="form-group">
+                                    <img src="#" alt="Preview" id="imgPreview" class="img-preview d-none">
+                                    @if (isset($testimonials->image) != '' && $testimonials->image)
+                                        <img src="{{ url( 'storage/' . $testimonials->image) }}" class="rounded-circle" style="width: 60px;" />
+                                    @else
+                                        <div class="avatar"></div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imageUpload">Image for Quotes given by</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imageUpload" name="image">
+                                        <label class="custom-file-label" for="imageUpload">Select file</label>
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- /.card-body -->
 

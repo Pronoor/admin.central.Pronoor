@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{ route('admin.testimonial.store') }}" id="quickForm">
+                        <form method="post" action="{{ route('admin.testimonial.store') }}" id="quickForm" enctype='multipart/form-data'>
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -66,6 +66,12 @@
                                     <label for="exampleInputPassword1">Quotes given by profession</label>
                                     <input type="text" class="form-control" name="quotes_given_by_profession"
                                         id="quotes_given_by_profession" value="{{ old('quotes_given_by_profession') }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imageInput">Image for Quotes given by</label>
+                                    <input type="file" class="form-control" name="image" id="imageInput"
+                                        value="{{ old('image') }}">
                                 </div>
                             </div>
                             <!-- /.card-body -->

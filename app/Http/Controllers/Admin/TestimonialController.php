@@ -42,7 +42,14 @@ class TestimonialController extends Controller
     public function store(StoreTestimonialRequest $request)
     {
         try {
-            Testimonial::create($request->getMenuBarPayload());
+            $payload = $request->getMenuBarPayload();
+
+            if($request->file('image')){
+                $logoPath = $request->file('image')->store('uploads/testimonials', 'public');
+                $payload['image'] = $logoPath;
+            }
+
+            Testimonial::create($payload);
             return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Testimonial Added Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Something Went Wrong!');;
@@ -84,11 +91,19 @@ class TestimonialController extends Controller
     public function update(UpdateTestimonialRequest $request, $id)
     {
         try {
-            Testimonial::find($id)->update($request->getMenuBarPayload([
+
+            $payload = $request->getMenuBarPayload([
                 'quote' =>$request->quote,
                 'quotes_given_by' =>$request->quotes_given_by,
                 'quotes_given_by_profession' =>$request->quotes_given_by_profession
-            ]));
+            ]);
+
+            if($request->file('image')){
+                $logoPath = $request->file('image')->store('uploads/testimonials', 'public');
+                $payload['image'] = $logoPath;
+            }
+
+            Testimonial::find($id)->update($payload);
             return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Testimonial Updated Successfully!');;
         } catch (\Exception $exception) {
             return redirect()->action([TestimonialController::class, 'index'])->with('status', 'Something Went Wrong!');;
